@@ -169,7 +169,6 @@ function patch_rpi_image {
 	# boot
 	mountpoint -q "$MNT_DIR/boot" || sudo mount "$IMAGE_FILE" -o loop,offset=$((8192*512)),rw "$MNT_DIR/boot"
 
-
 	mountpoint -q "$MNT_DIR/dev/" || sudo mount --bind /dev "$MNT_DIR/dev/"
 	mountpoint -q "$MNT_DIR/sys/" || sudo mount --bind /sys "$MNT_DIR/sys/"
 	mountpoint -q "$MNT_DIR/proc/" || sudo mount --bind /proc "$MNT_DIR/proc/"
@@ -192,6 +191,10 @@ function patch_rpi_image {
 	#change the /etc/network/interfaces file so that wpa_suppl does not mess around
 	sudo bash -c "echo -e \"auto lo\niface lo inet loopback\nauto eth0\nallow-hotplug eth0\niface eth0 inet manual\niface wlan0 inet manual\niface wlan1 inet manual\niface wlan2 inet manual\" > \"$MNT_DIR/etc/network/interfaces\""
 
+	# Copy the overlay content to the relevant folders on the image
+	# Could possibly use -a if all the attributes are correct
+	sudo cp -r "overlay/." "$MNT_DIR"
+
 	#run the install script (-> do the real work)
 	cp $INSTALL_SCRIPT "$MNT_DIR/home/pi"
 	sudo mount --bind /etc/resolv.conf "$MNT_DIR/etc/resolv.conf"
@@ -213,8 +216,6 @@ function patch_rpi_image {
 function zip_image {
 	zip $1 $2
 }
-
-
 
 mkdir -p "$DATA_DIR"
 

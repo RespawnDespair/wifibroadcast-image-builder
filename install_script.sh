@@ -2,11 +2,26 @@
 
 set -e
 
+# Latest package source
 sudo apt-get update
 
 # Install essentials
+sudo apt-get install udhcpd
+sudo apt-get install socat
+sudo apt-get -y install tshark
+sudo apt-get install ser2net
+sudo apt-get install gstreamer1.0-tools
+sudo apt-get install libtool
+sudo apt-get install autoconf
+sudo apt-get install libsdl1.2-dev
+sudo apt-get install libboost-all-dev cmake libconfig++-dev libreadline-dev
 sudo apt-get -y install git libpcap-dev wiringpi iw usbmount
 sudo apt-get install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
+sudo apt-get install tofrodos
+sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
+
+# Python essentials
+sudo pip install future
 
 # Remove all X related
 # sudo apt-get -y remove --auto-remove --purge libx11-.*
@@ -19,6 +34,22 @@ make clean
 make library
 sudo make install
 
+# Install mavlink-router
+cd /home/pi
+git clone https://github.com/intel/mavlink-router.git
+git submodule update --init --recursive
+./autogen.sh && ./configure CFLAGS='-g -O2' \
+        --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
+    --prefix=/usr
+make
+
+# Install cmavnode
+cd /home/pi
+git clone https://github.com/MonashUAS/cmavnode.git
+mkdir build && cd build
+cmake ..
+make
+sudo make install
 
 # install wifibroadcast base
 cd /home/pi
@@ -29,7 +60,6 @@ git submodule update
 make clean
 make
 
-
 #install wifibroadcast-osd
 cd /home/pi
 git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
@@ -39,44 +69,48 @@ git submodule update
 make clean
 make
 
+#install wifibroadcast-rc
+cd /home/pi
+git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
+cd wifibroadcast-rc
+sudo chmod +x build.sh
+sudo ./build.sh
 
+#install wifibroadcast-scripts
+cd /home/pi
+git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
+cd wifibroadcast-scripts
+# Copy to root so it runs on startup
+cp .profile /root/
 
-#hg clone https://bitbucket.org/befi/wifibroadcast
-#cd wifibroadcast
-#make
-
-#install new firmware
-#sudo cp "patches/AR9271/firmware/htc_9271.fw" "/lib/firmware"
 
 #patch hello_video
-#cd /home/pi
-#hg clone https://bitbucket.org/befi/hello_video
-#sudo cp hello_video/video.c /opt/vc/src/hello_pi/hello_video/video.c
+cd /home/pi
+git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
+sudo cp wifibroadcast-hello_video/* /opt/vc/src/hello_pi/hello_video/
+# REBUILDING DOES NOT WORK, BINARIES INCLUDED IN GIT
 #cd /opt/vc/src/hello_pi/
 #sudo ./rebuild.sh
 
 
-#install osd
-#cd /home/pi
-#hg clone https://bitbucket.org/befi/frsky_omx_osd
-#cd frsky_omx_osd
-#sudo make
+#install new firmware
+#sudo cp "patches/AR9271/firmware/htc_9271.fw" "/lib/firmware"
 
+# Make fifos
+sudo mkfifo /root/videofifo1
+sudo mkfifo /root/videofifo2
+sudo mkfifo /root/videofifo3
+sudo mkfifo /root/videofifo4
+sudo mkfifo /root/telemetryfifo1
+sudo mkfifo /root/telemetryfifo2
+sudo mkfifo /root/telemetryfifo3
+sudo mkfifo /root/telemetryfifo4
+sudo mkfifo /root/telemetryfifo5
+sudo mkfifo /root/telemetryfifo6
+sudo mkfifo /root/mspfifo
 
-#install startup scripts
-#cd /home/pi
-#hg clone https://bitbucket.org/befi/wifibroadcast_fpv_scripts
-#cd wifibroadcast_fpv_scripts
-#sudo cp systemd/*.service /etc/systemd/system
-
-#enable wifibroadcast, osd and shutdown pin
-#sudo systemctl enable wbcrxd
-#sudo systemctl enable wbctxd
-#sudo systemctl enable osd
-#sudo systemctl enable shutdown
-
-#enable camera
-sudo bash -c 'echo -e "\ngpu_mem=128\nstart_x=1\n" >> /boot/config.txt'
+#enable /dev/video0
+sudo modprobe bcm2835-v4l2
 
 #disable sync option for usbmount
 sudo sed -i 's/sync,//g' /etc/usbmount/usbmount.conf
@@ -90,9 +124,4 @@ if [ $? -eq 0 ]; then
 fi
 
 
-#always enable HDMI at 720p
-sudo bash -c 'echo -e "\nhdmi_force_hotplug=1\nhdmi_drive=2\nhdmi_group=1\nhdmi_mode=4\n" >> /boot/config.txt'
 
-
-#remove script that starts raspi config on first boot
-#sudo rm -rf /etc/profile.d/raspi-config.sh
