@@ -5,26 +5,30 @@ set -e
 # Latest package source
 sudo apt-get update
 
+# Remove all X related (2,3 Gb of Disk space freed...)
+sudo apt-get -y remove --auto-remove --purge libx11-.*
+
 # Install essentials
-sudo apt-get install udhcpd
-sudo apt-get install socat
+export DEBIAN_FRONTEND=noninteractive
+sudo apt-get -y install aircrack-ng
+sudo apt-get -y install gnuplot
+sudo apt-get -y install udhcpd
+sudo apt-get -y install socat
 sudo apt-get -y install tshark
-sudo apt-get install ser2net
-sudo apt-get install gstreamer1.0-tools
-sudo apt-get install libtool
-sudo apt-get install autoconf
-sudo apt-get install libsdl1.2-dev
-sudo apt-get install libboost-all-dev cmake libconfig++-dev libreadline-dev
+sudo apt-get -y install ser2net
+sudo apt-get -y install gstreamer1.0-tools
+sudo apt-get -y install libtool
+sudo apt-get -y install autoconf
+sudo apt-get -y install libsdl1.2-dev
+sudo apt-get -y install libboost-all-dev cmake libconfig++-dev libreadline-dev
 sudo apt-get -y install git libpcap-dev wiringpi iw usbmount
-sudo apt-get install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
-sudo apt-get install tofrodos
+sudo apt-get -y install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
+sudo apt-get -y install tofrodos
 sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
 
 # Python essentials
 sudo pip install future
 
-# Remove all X related
-# sudo apt-get -y remove --auto-remove --purge libx11-.*
 
 # Install OpenVG
 cd /home/pi
@@ -36,8 +40,9 @@ sudo make install
 
 # Install mavlink-router
 cd /home/pi
-git clone https://github.com/intel/mavlink-router.git
-git submodule update --init --recursive
+git clone --progress https://github.com/intel/mavlink-router.git 
+cd mavlink-router
+git submodule update --init --recursive --progress
 ./autogen.sh && ./configure CFLAGS='-g -O2' \
         --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
     --prefix=/usr
@@ -46,6 +51,7 @@ make
 # Install cmavnode
 cd /home/pi
 git clone https://github.com/MonashUAS/cmavnode.git
+cd cmavnode
 mkdir build && cd build
 cmake ..
 make
@@ -83,10 +89,15 @@ cd wifibroadcast-scripts
 # Copy to root so it runs on startup
 cp .profile /root/
 
+#install wifibroadcast-misc
+cd /home/pi
+git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
+
 
 #patch hello_video
 cd /home/pi
 git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
+cd wifibroadcast-hello_video
 sudo cp wifibroadcast-hello_video/* /opt/vc/src/hello_pi/hello_video/
 # REBUILDING DOES NOT WORK, BINARIES INCLUDED IN GIT
 #cd /opt/vc/src/hello_pi/

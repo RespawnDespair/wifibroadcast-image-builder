@@ -220,14 +220,14 @@ function zip_image {
 mkdir -p "$DATA_DIR"
 
 #prepare the kernel
-download_kernel_and_tools
-patch_kernel
-patch_kernel7
-compile_kernel
-compile_kernel7
+#download_kernel_and_tools
+#patch_kernel
+#patch_kernel7
+#compile_kernel
+#compile_kernel7
 
 #prepare the images
-download_image
+#download_image
 
 IMAGE_NAME="$BASE_IMAGE""_`date +%F`"
 IMAGE_FILE="$DATA_DIR/$IMAGE_NAME"".img"

@@ -17,6 +17,7 @@ function unmount {
 	sudo umount -l "$MNT_DIR/boot"
 	sudo umount -l "$MNT_DIR/etc/resolv.conf"
 	sudo umount -l "$MNT_DIR"
+	sudo umount -l "$MNT_DIR/var/cache"
 }
 
 unmount
