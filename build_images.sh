@@ -172,6 +172,10 @@ function patch_rpi_image {
 	mkdir -p "$MNT_DIR"
 	# rootfs
 	mountpoint -q "$MNT_DIR" || sudo mount "$IMAGE_FILE" -o loop,offset=$((98304*512)),rw "$MNT_DIR"
+
+	# Resize to full size
+	resize2fs -f /dev/loop0
+
 	# boot
 	mountpoint -q "$MNT_DIR/boot" || sudo mount "$IMAGE_FILE" -o loop,offset=$((8192*512)),rw "$MNT_DIR/boot"
 

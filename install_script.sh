@@ -28,8 +28,9 @@ sudo apt-get -y install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
 sudo apt-get -y install tofrodos
 sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
 
-# Python essentials
-sudo pip install future
+# Python essentials for mavlink router autoconf
+#sudo easy_install pip
+#sudo pip install future
 
 
 # Install OpenVG
@@ -55,6 +56,7 @@ sudo make install
 cd /home/pi
 git clone https://github.com/MonashUAS/cmavnode.git
 cd cmavnode
+git submodule update --init
 mkdir build && cd build
 cmake ..
 make
