@@ -5,9 +5,12 @@
 set -e
 set -o xtrace
 
+# Switch to lite? http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-06-29/2018-06-27-raspbian-stretch-lite.zip
+#BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian/images/raspbian-2018-06-29"
+#BASE_IMAGE="2018-06-27-raspbian-stretch"
 
-BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian/images/raspbian-2018-06-29"
-BASE_IMAGE="2018-06-27-raspbian-stretch"
+BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-06-29"
+BASE_IMAGE="2018-06-27-raspbian-stretch-lite"
 
 
 DATA_DIR="$PWD/data"
@@ -28,6 +31,9 @@ function download_image {
 			wget $BASE_IMAGE_URL/$BASE_IMAGE".zip"
 		fi
 		unzip $BASE_IMAGE".zip"
+
+		# Magically enlarge the disk
+		source increasesize.sh
 	fi
 
 	popd
@@ -220,14 +226,14 @@ function zip_image {
 mkdir -p "$DATA_DIR"
 
 #prepare the kernel
-#download_kernel_and_tools
-#patch_kernel
-#patch_kernel7
-#compile_kernel
-#compile_kernel7
+download_kernel_and_tools
+patch_kernel
+patch_kernel7
+compile_kernel
+compile_kernel7
 
 #prepare the images
-#download_image
+download_image
 
 IMAGE_NAME="$BASE_IMAGE""_`date +%F`"
 IMAGE_FILE="$DATA_DIR/$IMAGE_NAME"".img"

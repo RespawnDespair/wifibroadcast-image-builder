@@ -5,16 +5,18 @@ set -e
 # Latest package source
 sudo apt-get update
 
-# Remove all X related (2,3 Gb of Disk space freed...)
-sudo apt-get -y remove --auto-remove --purge libx11-.*
+# Remove all X related (2,3 Gb of Disk space freed...) 
+# Should be fixed with lite image
+#sudo apt-get -y remove --auto-remove --purge libx11-.*
 
 # Install essentials
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get -y install aircrack-ng
+#untill we find a way for noniteractive
+#sudo apt-get -y install aircrack-ng
 sudo apt-get -y install gnuplot
 sudo apt-get -y install udhcpd
 sudo apt-get -y install socat
-sudo apt-get -y install tshark
+#sudo apt-get -y install tshark
 sudo apt-get -y install ser2net
 sudo apt-get -y install gstreamer1.0-tools
 sudo apt-get -y install libtool
@@ -32,21 +34,22 @@ sudo pip install future
 
 # Install OpenVG
 cd /home/pi
-git clone https://github.com/ajstarks/openvg.git
+GIT_TRACE=1 GIT_CURL_VERBOSE=1 git clone --verbose https://github.com/ajstarks/openvg.git
 cd openvg
 make clean
 make library
 sudo make install
 
+# Gets stuck
 # Install mavlink-router
-cd /home/pi
-git clone --progress https://github.com/intel/mavlink-router.git 
-cd mavlink-router
-git submodule update --init --recursive --progress
-./autogen.sh && ./configure CFLAGS='-g -O2' \
-        --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
-    --prefix=/usr
-make
+#cd /home/pi
+#git clone --progress https://github.com/intel/mavlink-router.git 
+#cd mavlink-router
+#git submodule update --init --recursive --progress
+#./autogen.sh && ./configure CFLAGS='-g -O2' \
+#        --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
+#    --prefix=/usr
+#make
 
 # Install cmavnode
 cd /home/pi
