@@ -3,6 +3,8 @@
 set -e
 
 # Latest package source
+sudo rm -rf /var/lib/apt/lists/*
+sudo apt-get clean
 sudo apt-get update
 
 # Remove all X related (2,3 Gb of Disk space freed...) 
@@ -12,11 +14,12 @@ sudo apt-get update
 # Install essentials
 export DEBIAN_FRONTEND=noninteractive
 #untill we find a way for noniteractive
-#sudo apt-get -y install aircrack-ng
+sudo apt-get -y install python-pip
+sudo apt-get -y install aircrack-ng
 sudo apt-get -y install gnuplot
 sudo apt-get -y install udhcpd
 sudo apt-get -y install socat
-#sudo apt-get -y install tshark
+sudo apt-get -y install tshark
 sudo apt-get -y install ser2net
 sudo apt-get -y install gstreamer1.0-tools
 sudo apt-get -y install libtool
@@ -30,8 +33,10 @@ sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
 
 # Python essentials for mavlink router autoconf
 #sudo easy_install pip
-#sudo pip install future
+sudo pip install future
 
+# Git:// uri does not always work
+git config --global url."https://".insteadOf git://
 
 # Install OpenVG
 cd /home/pi
@@ -43,14 +48,14 @@ sudo make install
 
 # Gets stuck
 # Install mavlink-router
-#cd /home/pi
-#git clone --progress https://github.com/intel/mavlink-router.git 
-#cd mavlink-router
-#git submodule update --init --recursive --progress
-#./autogen.sh && ./configure CFLAGS='-g -O2' \
-#        --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
-#    --prefix=/usr
-#make
+cd /home/pi
+git clone --progress https://github.com/intel/mavlink-router.git 
+cd mavlink-router
+git submodule update --init --recursive --progress
+./autogen.sh && ./configure CFLAGS='-g -O2' \
+        --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
+    --prefix=/usr
+make
 
 # Install cmavnode
 cd /home/pi
@@ -92,7 +97,7 @@ cd /home/pi
 git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
 cd wifibroadcast-scripts
 # Copy to root so it runs on startup
-cp .profile /root/
+sudo cp .profile /root/
 
 #install wifibroadcast-misc
 cd /home/pi
@@ -102,7 +107,6 @@ git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
 #patch hello_video
 cd /home/pi
 git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
-cd wifibroadcast-hello_video
 sudo cp wifibroadcast-hello_video/* /opt/vc/src/hello_pi/hello_video/
 # REBUILDING DOES NOT WORK, BINARIES INCLUDED IN GIT
 #cd /opt/vc/src/hello_pi/
@@ -126,7 +130,7 @@ sudo mkfifo /root/telemetryfifo6
 sudo mkfifo /root/mspfifo
 
 #enable /dev/video0
-sudo modprobe bcm2835-v4l2
+#sudo modprobe bcm2835-v4l2
 
 #disable sync option for usbmount
 sudo sed -i 's/sync,//g' /etc/usbmount/usbmount.conf

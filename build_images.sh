@@ -33,7 +33,7 @@ function download_image {
 		unzip $BASE_IMAGE".zip"
 
 		# Magically enlarge the disk
-		source increasesize.sh
+		source ../increasesize.sh
 	fi
 
 	popd

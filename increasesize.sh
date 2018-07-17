@@ -6,13 +6,13 @@
 
 
 # Create empty image
-dd if=/dev/zero of=data/temp.img bs=1 count=1 seek=2G
+dd if=/dev/zero of=temp.img bs=1 count=1 seek=2G
 
 # Append to original image
-cat data/temp.img >> data/2018-06-27-raspbian-stretch-lite.img
+cat temp.img >> 2018-06-27-raspbian-stretch-lite.img
 
 # fdisk magic
-fdisk data/2018-06-27-raspbian-stretch-lite.img <<EOF
+fdisk 2018-06-27-raspbian-stretch-lite.img <<EOF
 d
 2
 n
