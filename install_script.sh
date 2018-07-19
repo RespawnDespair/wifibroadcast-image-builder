@@ -15,7 +15,7 @@ sudo apt-get update
 export DEBIAN_FRONTEND=noninteractive
 #untill we find a way for noniteractive
 sudo apt-get -y install python-pip
-sudo apt-get -y install aircrack-ng
+sudo apt-get -yq install aircrack-ng
 sudo apt-get -y install gnuplot
 sudo apt-get -y install udhcpd
 sudo apt-get -y install socat
@@ -36,72 +36,73 @@ sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
 sudo pip install future
 
 # Git:// uri does not always work
-git config --global url."https://".insteadOf git://
+sudo git config --global url."https://github.com/".insteadOf git@github.com:
+sudo git config --global url."https://".insteadOf git://
 
 # Install OpenVG
 cd /home/pi
-GIT_TRACE=1 GIT_CURL_VERBOSE=1 git clone --verbose https://github.com/ajstarks/openvg.git
+sudo git clone --verbose https://github.com/ajstarks/openvg.git
 cd openvg
-make clean
-make library
+sudo make clean
+sudo make library
 sudo make install
 
 # Gets stuck
 # Install mavlink-router
 cd /home/pi
-git clone --progress https://github.com/intel/mavlink-router.git 
+sudo git clone --progress https://github.com/intel/mavlink-router.git 
 cd mavlink-router
-git submodule update --init --recursive --progress
-./autogen.sh && ./configure CFLAGS='-g -O2' \
+sudo git submodule update --init --recursive --progress
+sudo ./autogen.sh && sudo ./configure CFLAGS='-g -O2' \
         --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
     --prefix=/usr
-make
+sudo make
 
 # Install cmavnode
 cd /home/pi
-git clone https://github.com/MonashUAS/cmavnode.git
+sudo git clone https://github.com/MonashUAS/cmavnode.git
 cd cmavnode
-git submodule update --init
-mkdir build && cd build
-cmake ..
-make
+sudo git submodule update --init
+sudo mkdir build && cd build
+sudo cmake ..
+sudo make
 sudo make install
 
 # install wifibroadcast base
 cd /home/pi
-git clone https://github.com/RespawnDespair/wifibroadcast-base.git
+sudo git clone https://github.com/RespawnDespair/wifibroadcast-base.git
 cd wifibroadcast-base
-git submodule init
-git submodule update
-make clean
-make
+sudo git submodule init
+sudo git submodule update
+sudo make clean
+sudo make
 
 #install wifibroadcast-osd
 cd /home/pi
-git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
+sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
 cd wifibroadcast-osd
-git submodule init
-git submodule update
-make clean
-make
+sudo git submodule init
+sudo git submodule update
+sudo make clean
+sudo make
 
 #install wifibroadcast-rc
 cd /home/pi
-git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
+sudo git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
 cd wifibroadcast-rc
 sudo chmod +x build.sh
 sudo ./build.sh
 
 #install wifibroadcast-scripts
 cd /home/pi
-git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
+sudo git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
 cd wifibroadcast-scripts
 # Copy to root so it runs on startup
 sudo cp .profile /root/
 
 #install wifibroadcast-misc
 cd /home/pi
-git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
+sudo git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
 
 
 #patch hello_video
