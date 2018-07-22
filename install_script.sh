@@ -15,11 +15,11 @@ sudo apt-get update
 export DEBIAN_FRONTEND=noninteractive
 #untill we find a way for noniteractive
 sudo apt-get -y install python-pip
-sudo apt-get -yq install aircrack-ng
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install aircrack-ng
 sudo apt-get -y install gnuplot
 sudo apt-get -y install udhcpd
 sudo apt-get -y install socat
-sudo apt-get -y install tshark
+DEBIAN_FRONTEND=noninteractive sudo apt-get -y install tshark
 sudo apt-get -y install ser2net
 sudo apt-get -y install gstreamer1.0-tools
 sudo apt-get -y install libtool
@@ -36,8 +36,8 @@ sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
 sudo pip install future
 
 # Git:// uri does not always work
-sudo git config --global url."https://github.com/".insteadOf git@github.com:
-sudo git config --global url."https://".insteadOf git://
+sudo git config --global url."http://github.com/".insteadOf git@github.com:
+sudo git config --global url."http://".insteadOf git://
 
 # Install OpenVG
 cd /home/pi
@@ -131,7 +131,7 @@ sudo mkfifo /root/telemetryfifo6
 sudo mkfifo /root/mspfifo
 
 # Copy tty autologin stuff
-cd /etx/systemd/system/getty.target.wants
+cd /etc/systemd/system/getty.target.wants
 sudo cp getty@tty1.service getty@tty2.service
 sudo cp getty@tty1.service getty@tty3.service
 sudo cp getty@tty1.service getty@tty4.service
