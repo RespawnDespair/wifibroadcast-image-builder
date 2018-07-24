@@ -116,8 +116,29 @@ cd /home/pi
 #git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
 sudo cp wifibroadcast-hello_video/* /opt/vc/src/hello_pi/hello_video/
 # REBUILDING DOES NOT WORK, BINARIES INCLUDED IN GIT
-#cd /opt/vc/src/hello_pi/
-#sudo ./rebuild.sh
+cd /opt/vc/src/hello_pi/hello_video
+sudo rm hello_video.bin.player
+sudo rm hello_video.bin.48-mm
+sudo rm hello_video.bin.39-mm
+sudo rm hello_video.bin.240-befi
+
+sudo cp video.c.48-mm video.c
+cd ..
+sudo make
+cd /opt/vc/src/hello_pi/hello_video
+mv hello_video.bin hello_video.bin.48-mm
+
+sudo cp video.c.30-mm video.c
+cd ..
+sudo make
+cd /opt/vc/src/hello_pi/hello_video
+mv hello_video.bin hello_video.bin.30-mm
+
+sudo cp video.c.240-befi video.c
+cd ..
+sudo make
+cd /opt/vc/src/hello_pi/hello_video
+mv hello_video.bin hello_video.bin.240-befi
 
 
 #install new firmware
