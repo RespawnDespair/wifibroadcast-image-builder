@@ -15,6 +15,7 @@ BASE_IMAGE="2018-06-27-raspbian-stretch-lite"
 
 DATA_DIR="$PWD/data"
 MNT_DIR="$DATA_DIR/mnt"
+GIT_DIR="$DATA_DIR/git"
 KERNEL_DIR="$DATA_DIR/kernel"
 KERNEL_PATCHES="$PWD/kernel_patches/*.patch"
 
@@ -41,7 +42,7 @@ function download_image {
 
 function download_kernel_and_tools {
 	pushd $PWD
-	
+
 	mkdir -p "$KERNEL_DIR"
 	cd "$KERNEL_DIR"
 
@@ -49,7 +50,7 @@ function download_kernel_and_tools {
 	then
 		git clone https://github.com/raspberrypi/tools ~/tools
 		echo PATH=\$PATH:~/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin >> ~/.bashrc
-		source ~/.bashrc	
+		source ~/.bashrc
 	fi
 
 	if [ ! -d linux ]
@@ -162,6 +163,52 @@ function install_kernel {
 	popd
 }
 
+function create_git_structure {
+	pushd $PWD
+
+	sudo git config --global url."https://github.com/".insteadOf git@github.com:
+	sudo git config --global url."https://".insteadOf git://
+
+	rm -r "$GIT_DIR"
+	mkdir -p "$GIT_DIR"
+
+	cd "$GIT_DIR"
+	sudo git clone --verbose https://github.com/ajstarks/openvg.git
+
+	sudo git clone --progress https://github.com/intel/mavlink-router.git 
+	cd mavlink-router
+	sudo git submodule update --init --recursive
+
+	cd "$GIT_DIR"
+
+	sudo git clone https://github.com/MonashUAS/cmavnode.git
+	cd cmavnode
+	sudo git submodule update --init
+
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-base.git
+
+	cd "$GIT_DIR"
+
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-base.git
+	cd wifibroadcast-base
+	sudo git submodule update --init
+
+	cd "$GIT_DIR"
+
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
+	cd wifibroadcast-osd
+	sudo git submodule update --init
+
+	cd "$GIT_DIR"
+
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
+
+	popd
+}
+
 function patch_rpi_image {
 	#make a copy of the base image
 	IMAGE_FILE="$1"
@@ -205,6 +252,9 @@ function patch_rpi_image {
 	# Could possibly use -a if all the attributes are correct
 	sudo cp -r "overlay/." "$MNT_DIR"
 
+	# Copy the GIT structure
+	sudo cp -r "$GIT_DIR/." "$MNT_DIR/home/pi/"
+
 	#run the install script (-> do the real work)
 	cp $INSTALL_SCRIPT "$MNT_DIR/home/pi"
 	sudo mount --bind /etc/resolv.conf "$MNT_DIR/etc/resolv.conf"
@@ -230,6 +280,7 @@ function zip_image {
 mkdir -p "$DATA_DIR"
 
 #prepare the kernel
+create_git_structure
 download_kernel_and_tools
 patch_kernel
 patch_kernel7
