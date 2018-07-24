@@ -2,6 +2,10 @@
 
 set -e
 
+# disable dhcpcd service
+sudo systemctl stop dhcpcd.service
+sudo systemctl disable dhcpcd.service
+
 # Latest package source
 sudo rm -rf /var/lib/apt/lists/*
 sudo apt-get clean
