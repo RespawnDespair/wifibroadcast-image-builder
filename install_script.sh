@@ -89,6 +89,12 @@ cd wifibroadcast-rc
 sudo chmod +x build.sh
 sudo ./build.sh
 
+#install wifibroadcast-status
+cd /home/pi
+cd wifibroadcast-status
+sudo make clean
+sudo make
+
 #install wifibroadcast-scripts
 cd /home/pi
 #sudo git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git

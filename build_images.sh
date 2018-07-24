@@ -202,6 +202,7 @@ function create_git_structure {
 	cd "$GIT_DIR"
 
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-status.git
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
