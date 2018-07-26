@@ -107,8 +107,11 @@ cd wifibroadcast-scripts
 sudo cp .profile /root/
 
 #install wifibroadcast-misc
-#cd /home/pi
+cd /home/pi
 #sudo git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
+cd wifibroadcast-misc
+sudo chmod +x ftee
+sudo chmod +x raspi2png
 
 
 #patch hello_video
@@ -117,7 +120,6 @@ cd /home/pi
 sudo cp wifibroadcast-hello_video/* /opt/vc/src/hello_pi/hello_video/
 # REBUILDING DOES NOT WORK, BINARIES INCLUDED IN GIT
 cd /opt/vc/src/hello_pi/hello_video
-sudo rm hello_video.bin.player
 sudo rm hello_video.bin.48-mm
 sudo rm hello_video.bin.39-mm
 sudo rm hello_video.bin.240-befi
@@ -170,6 +172,10 @@ sudo cp getty@tty1.service getty@tty9.service
 sudo cp getty@tty1.service getty@tty10.service
 sudo cp getty@tty1.service getty@tty11.service
 sudo cp getty@tty1.service getty@tty12.service
+
+# raspi-config is not executable after copy
+cd /etc/init.d/
+sudo chmod +x raspi-config 
 
 #enable /dev/video0
 #sudo modprobe bcm2835-v4l2
