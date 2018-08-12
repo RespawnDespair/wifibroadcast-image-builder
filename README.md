@@ -10,6 +10,7 @@ apt-get install qemu qemu-user-static binfmt-support
 Then git clone this repository to a suitable folder and run:
 
 ```
+sudo -s
 ./build_images.sh
 ```
 
