@@ -3,7 +3,8 @@
 # apt dependencies: qemu qemu-user-static binfmt-support
 
 set -e
-set -o xtrace
+# Extreme logging off for quieter experience
+# set -o xtrace
 
 # Switch to lite? http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-06-29/2018-06-27-raspbian-stretch-lite.zip
 #BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian/images/raspbian-2018-06-29"
@@ -169,7 +170,11 @@ function create_git_structure {
 	sudo git config --global url."https://github.com/".insteadOf git@github.com:
 	sudo git config --global url."https://".insteadOf git://
 
-	rm -r "$GIT_DIR"
+	if [ -d "$GIT_DIR" ]
+	then
+		rm -r "$GIT_DIR"
+	fi
+
 	mkdir -p "$GIT_DIR"
 
 	cd "$GIT_DIR"
@@ -301,3 +306,9 @@ INSTALL_SCRIPT="install_script.sh"
 
 patch_rpi_image "$IMAGE_FILE" "$INSTALL_SCRIPT"
 zip_image "$DATA_DIR/$IMAGE_NAME"".zip" "$IMAGE_FILE"
+
+clear
+echo "Image created succesfully"
+echo "IMAGE PATH: $IMAGE_FILE"
+echo "ZIP FILE: $DATA_DIR/$IMAGE_NAME"".zip"
+
