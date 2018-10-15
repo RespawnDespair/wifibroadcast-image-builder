@@ -37,6 +37,8 @@ sudo apt-get -y install dos2unix
 sudo apt-get -y install hostapd
 sudo apt-get -y install pump
 sudo apt-get -y install libpng12-dev
+sudo apt-get -y install python-future python-attr
+sudo apt-get -y install python-m2crypto
 
 #sudo apt-get -y install tofrodos
 #sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
@@ -47,19 +49,17 @@ sudo pip install future
 
 # Wifi reg patch
 cd /home/pi
-sudo apt-get install python-m2crypto
 sudo wget https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2018.09.07.tar.xz
 sudo tar xf wireless-regdb-2018.09.07.tar.xz
 cd wireless-regdb-2018.09.07
 sudo sed -i '3cCRDA_PATH ?= /lib/crda' Makefile
-sudo apt-get install python-future python-attr
 sudo sed -i 's/2402 - 2472/2302 - 2742/g' db.txt
 sudo sed -i 's/(20)/(30)/g' db.txt
 sudo make
 sudo make install
-sudo iw reg set BO
-sudo REGDOMAIN=BO
-sudo sed -i 's/REGDOMAIN=/REGDOMAIN=BO/g' /etc/default/crda
+sudo iw reg set US
+sudo REGDOMAIN=US
+sudo sed -i 's/REGDOMAIN=/REGDOMAIN=US/g' /etc/default/crda
 
 # Install OpenVG
 cd /home/pi
