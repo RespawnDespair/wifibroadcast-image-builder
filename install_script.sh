@@ -45,6 +45,22 @@ sudo apt-get -y install libpng12-dev
 #sudo easy_install pip
 sudo pip install future
 
+# Wifi reg patch
+cd /home/pi
+sudo apt-get install python-m2crypto
+sudo wget https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2018.09.07.tar.xz
+sudo tar xf wireless-regdb-2018.09.07.tar.xz
+cd wireless-regdb-2018.09.07
+sudo sed -i '3cCRDA_PATH ?= /lib/crda' Makefile
+sudo apt-get install python-future python-attr
+sudo sed -i 's/2402 - 2472/2302 - 2742/g' db.txt
+sudo sed -i 's/(20)/(30)/g' db.txt
+sudo make
+sudo make install
+sudo iw reg set BO
+sudo REGDOMAIN=BO
+sudo sed -i 's/REGDOMAIN=/REGDOMAIN=BO/g' /etc/default/crda
+
 # Install OpenVG
 cd /home/pi
 #sudo git clone --verbose https://github.com/ajstarks/openvg.git
