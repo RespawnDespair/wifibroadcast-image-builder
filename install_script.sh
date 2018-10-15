@@ -32,8 +32,14 @@ sudo apt-get -y install libsdl1.2-dev
 sudo apt-get -y install libboost-all-dev cmake libconfig++-dev libreadline-dev
 sudo apt-get -y install git libpcap-dev wiringpi iw usbmount
 sudo apt-get -y install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
-sudo apt-get -y install tofrodos
-sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
+sudo apt-get -y install python-m2crypto
+sudo apt-get -y install dos2unix
+sudo apt-get -y install hostapd
+sudo apt-get -y install pump
+sudo apt-get -y install libpng12-dev
+
+#sudo apt-get -y install tofrodos
+#sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
 
 # Python essentials for mavlink router autoconf
 #sudo easy_install pip
