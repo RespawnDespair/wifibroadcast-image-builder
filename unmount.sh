@@ -9,15 +9,15 @@ DATA_DIR="$PWD/data"
 MNT_DIR="$DATA_DIR/mnt"
 
 function unmount {
-	sudo umount -l "$MNT_DIR/sys"
-	sudo umount -l "$MNT_DIR/proc"
-	sudo umount -l "$MNT_DIR/dev/pts"
-	sudo umount -l "$MNT_DIR/dev"
+	sudo umount -l "$MNT_DIR/sys" || true
+	sudo umount -l "$MNT_DIR/proc" || true
+	sudo umount -l "$MNT_DIR/dev/pts" || true
+	sudo umount -l "$MNT_DIR/dev" || true
 
-	sudo umount -l "$MNT_DIR/boot"
-	sudo umount -l "$MNT_DIR/etc/resolv.conf"
-	sudo umount -l "$MNT_DIR"
-	sudo umount -l "$MNT_DIR/var/cache"
+	sudo umount -l "$MNT_DIR/boot" || true
+	sudo umount -l "$MNT_DIR/etc/resolv.conf" || true
+	sudo umount -l "$MNT_DIR" || true
+	sudo umount -l "$MNT_DIR/var/cache" || true
 }
 
 unmount
