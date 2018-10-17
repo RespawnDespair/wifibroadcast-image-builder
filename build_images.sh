@@ -186,8 +186,10 @@ function create_git_structure {
 	sudo git submodule update --init --recursive
 
 	#fix missing pymavlink
-	cd /modules/mavlink
-	sudo git clone --recurse-submodules https://github.com/ArduPilot/pymavlink.git
+	cd modules/mavlink
+	sudo git clone https://github.com/ArduPilot/pymavlink.git
+	cd pymavlink
+	sudo git submodule update --init --recursive
 	
 	cd "$GIT_DIR"
 
