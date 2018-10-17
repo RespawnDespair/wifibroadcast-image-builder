@@ -39,6 +39,9 @@ sudo apt-get -y install hostapd
 sudo apt-get -y install pump
 sudo apt-get -y install libpng12-dev
 sudo apt-get -y install python-future python-attr
+sudo apt-get -y install libfontconfig1-dev 
+sudo apt-get -y install libsdl2-dev
+sudo apt-get -y install libsdl1.2-dev
 
 #sudo apt-get -y install tofrodos
 #sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
@@ -100,10 +103,7 @@ sudo make
 
 #install wifibroadcast-osd
 cd /home/pi
-#sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
 cd wifibroadcast-osd
-#sudo git submodule init
-#sudo git submodule update
 sudo make clean
 sudo make
 
