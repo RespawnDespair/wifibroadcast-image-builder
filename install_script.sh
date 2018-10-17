@@ -27,6 +27,8 @@ sudo apt-get -y install socat
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install tshark
 sudo apt-get -y install ser2net
 sudo apt-get -y install gstreamer1.0-tools
+sudo apt-get -y install gstreamer1.0-plugins-bad
+sudo apt-get -y install gstreamer1.0-plugins-good
 sudo apt-get -y install libtool
 sudo apt-get -y install autoconf
 sudo apt-get -y install libsdl1.2-dev
