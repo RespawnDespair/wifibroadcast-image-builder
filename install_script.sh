@@ -58,8 +58,25 @@ sudo wget https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wi
 sudo tar xf wireless-regdb-2018.09.07.tar.xz
 cd wireless-regdb-2018.09.07
 sudo sed -i '3cCRDA_PATH ?= /lib/crda' Makefile
-sudo sed -i 's/2402 - 2472/2302 - 2742/g' db.txt
-sudo sed -i 's/(20)/(30)/g' db.txt
+
+# Rewrite db
+sudo echo -n "" > db.txt
+
+sudo echo -e "country 00:\n" >> db.txt
+sudo echo -e "(2302 - 2742 @ 40), (30)\n" >> db.txt
+sudo echo -e "(5170 - 5250 @ 80), (30), AUTO-BW\n" >> db.txt
+sudo echo -e "(5250 - 5330 @ 80), (30), DFS, AUTO-BW\n" >> db.txt
+sudo echo -e "(5490 - 5730 @ 160), (30), DFS\n" >> db.txt
+sudo echo -e "(5735 - 5835 @ 80), (30)\n" >> db.txt
+sudo echo -e "\n" >> db.txt
+sudo echo -e "country US: DFS-FCC\n" >> db.txt
+sudo echo -e "(2302 - 2742 @ 40), (30)\n" >> db.txt
+sudo echo -e "(5170 - 5250 @ 80), (30), AUTO-BW\n" >> db.txt
+sudo echo -e "(5250 - 5330 @ 80), (30), DFS, AUTO-BW\n" >> db.txt
+sudo echo -e "(5490 - 5730 @ 160), (30), DFS\n" >> db.txt
+sudo echo -e "(5735 - 5835 @ 80), (30)\n" >> db.txt
+
+# Now make and install
 sudo make
 sudo make install
 sudo iw reg set US || true
