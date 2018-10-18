@@ -60,21 +60,20 @@ cd wireless-regdb-2018.09.07
 sudo sed -i '3cCRDA_PATH ?= /lib/crda' Makefile
 
 # Rewrite db
-sudo echo -n "" > db.txt
-
-sudo echo -e "country 00:\n" >> db.txt
-sudo echo -e "(2302 - 2742 @ 40), (30)\n" >> db.txt
-sudo echo -e "(5170 - 5250 @ 80), (30), AUTO-BW\n" >> db.txt
-sudo echo -e "(5250 - 5330 @ 80), (30), DFS, AUTO-BW\n" >> db.txt
-sudo echo -e "(5490 - 5730 @ 160), (30), DFS\n" >> db.txt
-sudo echo -e "(5735 - 5835 @ 80), (30)\n" >> db.txt
-sudo echo -e "\n" >> db.txt
-sudo echo -e "country US: DFS-FCC\n" >> db.txt
-sudo echo -e "(2302 - 2742 @ 40), (30)\n" >> db.txt
-sudo echo -e "(5170 - 5250 @ 80), (30), AUTO-BW\n" >> db.txt
-sudo echo -e "(5250 - 5330 @ 80), (30), DFS, AUTO-BW\n" >> db.txt
-sudo echo -e "(5490 - 5730 @ 160), (30), DFS\n" >> db.txt
-sudo echo -e "(5735 - 5835 @ 80), (30)\n" >> db.txt
+sudo sh -c "echo -n '' > db.txt"
+sudo sh -c "echo 'country 00:' >> db.txt"
+sudo sh -c "echo '(2302 - 2742 @ 40), (30)' >> db.txt"
+sudo sh -c "echo '(5170 - 5250 @ 80), (30), AUTO-BW' >> db.txt"
+sudo sh -c "echo '(5250 - 5330 @ 80), (30), DFS, AUTO-BW' >> db.txt"
+sudo sh -c "echo '(5490 - 5730 @ 160), (30), DFS' >> db.txt"
+sudo sh -c "echo '(5735 - 5835 @ 80), (30)' >> db.txt"
+sudo sh -c "echo '' >> db.txt"
+sudo sh -c "echo 'country US: DFS-FCC' >> db.txt"
+sudo sh -c "echo '(2302 - 2742 @ 40), (30)' >> db.txt"
+sudo sh -c "echo '(5170 - 5250 @ 80), (30), AUTO-BW' >> db.txt"
+sudo sh -c "echo '(5250 - 5330 @ 80), (30), DFS, AUTO-BW' >> db.txt"
+sudo sh -c "echo '(5490 - 5730 @ 160), (30), DFS' >> db.txt"
+sudo sh -c "echo '(5735 - 5835 @ 80), (30)' >> db.txt"
 
 # Now make and install
 sudo make
