@@ -180,17 +180,16 @@ function create_git_structure {
 	cd "$GIT_DIR"
 	sudo git clone --verbose https://github.com/ajstarks/openvg.git
 
+	
 	sudo git clone -b rock64 https://github.com/estechnical/mavlink-router.git
-	# sudo git clone --progress https://github.com/intel/mavlink-router.git 
+		
 	cd mavlink-router
-	sudo git submodule update --init --recursive
+	sudo git submodule update --init
 
 	#fix missing pymavlink
 	cd modules/mavlink
-	sudo git clone https://github.com/ArduPilot/pymavlink.git
-	cd pymavlink
-	sudo git submodule update --init --recursive
-	
+	sudo git clone --recurse-submodules  https://github.com/ArduPilot/pymavlink.git
+		
 	cd "$GIT_DIR"
 
 	sudo git clone https://github.com/MonashUAS/cmavnode.git
