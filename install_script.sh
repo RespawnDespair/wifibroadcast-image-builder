@@ -120,10 +120,10 @@ sudo make clean
 sudo make
 
 #install wifibroadcast-osd
-cd /home/pi
-cd wifibroadcast-osd
-sudo make clean
-sudo make
+#cd /home/pi
+#cd wifibroadcast-osd
+#sudo make clean
+#sudo make
 
 #install wifibroadcast-rc
 cd /home/pi
