@@ -206,13 +206,13 @@ function create_git_structure {
 
 	cd "$GIT_DIR"
 
-	sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd-orig.git wifibroadcast-osd
 	cd wifibroadcast-osd
 	sudo git submodule update --init
 
 	cd "$GIT_DIR"
 
-	sudo git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-rc-orig.git wifibroadcast-rc
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-status.git
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-scripts.git
 	sudo git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
