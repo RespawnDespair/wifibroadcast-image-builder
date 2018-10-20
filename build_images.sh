@@ -230,7 +230,7 @@ function patch_rpi_image {
 	#mount the image
 	mkdir -p "$MNT_DIR"
 	# rootfs
-	mountpoint -q "$MNT_DIR" || sudo mount "$IMAGE_FILE" -o loop,offset=$((98304*512)),rw "$MNT_DIR"
+	mountpoint -q "$MNT_DIR" || sudo mount "$IMAGE_FILE" -o loop,offset=$((98304*512)),rw,sizelimit=$((7733248*512)) "$MNT_DIR"
 
 	# give it some time
 	sleep 5
@@ -240,7 +240,7 @@ function patch_rpi_image {
 	resize2fs -f "$LOOP_DEV"
 
 	# boot
-	mountpoint -q "$MNT_DIR/boot" || sudo mount "$IMAGE_FILE" -o loop,offset=$((8192*512)),rw "$MNT_DIR/boot"
+	mountpoint -q "$MNT_DIR/boot" || sudo mount "$IMAGE_FILE" -o loop,offset=$((8192*512)),rw,sizelimit=$((88472*512)) "$MNT_DIR/boot"
 
 	mountpoint -q "$MNT_DIR/dev/" || sudo mount --bind /dev "$MNT_DIR/dev/"
 	mountpoint -q "$MNT_DIR/sys/" || sudo mount --bind /sys "$MNT_DIR/sys/"

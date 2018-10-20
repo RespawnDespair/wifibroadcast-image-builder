@@ -130,7 +130,7 @@ cd /home/pi
 #sudo git clone https://github.com/RespawnDespair/wifibroadcast-rc.git
 cd wifibroadcast-rc
 sudo chmod +x build.sh
-sudo ./build.sh
+#sudo ./build.sh
 
 #install wifibroadcast-status
 cd /home/pi
