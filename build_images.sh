@@ -178,8 +178,9 @@ function create_git_structure {
 	mkdir -p "$GIT_DIR"
 
 	cd "$GIT_DIR"
-	sudo git clone --verbose https://github.com/ajstarks/openvg.git
-
+	
+	# expirimental version with LoadTTFFile
+	sudo git clone -b newfonts https://github.com/paeryn/openvg.git
 	
 	sudo git clone -b rock64 https://github.com/estechnical/mavlink-router.git
 		
