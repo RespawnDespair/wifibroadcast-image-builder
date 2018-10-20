@@ -27,7 +27,7 @@ case "$1" in
       #  echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
       #fi
 
-      /home/pi/wifibroadcast-status/wbc_status "EZ-WifiBroadcast 2.0.0-Beta" 2 30 1 &
+      /home/pi/wifibroadcast-status/wbc_status "EZ-WifiBroadcast 1.6-Beta" 2 30 1 &
 
       log_end_msg 0
     fi
