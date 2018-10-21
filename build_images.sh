@@ -179,7 +179,8 @@ function create_git_structure {
 
 	cd "$GIT_DIR"
 
-	sudo git clone https://github.com/ajstarks/openvg.git
+	# this appears to be the right branche according to the git information in the 1.6 image
+	sudo git clone -b windowsave https://github.com/paeryn/openvg.git
 	
 	sudo git clone -b rock64 https://github.com/estechnical/mavlink-router.git
 		
@@ -206,7 +207,7 @@ function create_git_structure {
 
 	cd "$GIT_DIR"
 
-	sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd.git
+	sudo git clone https://github.com/RespawnDespair/wifibroadcast-osd-orig.git wifibroadcast-osd
 	cd wifibroadcast-osd
 	sudo git submodule update --init
 
