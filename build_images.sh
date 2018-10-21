@@ -179,8 +179,8 @@ function create_git_structure {
 
 	cd "$GIT_DIR"
 
-	# this appears to be the right branche according to the git information in the 1.6 image
-	sudo git clone -b windowsave https://github.com/paeryn/openvg.git
+	# custom repository for modified openvg library
+	sudo git clone https://github.com/RespawnDespair/openvg-font.git openvg
 	
 	sudo git clone -b rock64 https://github.com/estechnical/mavlink-router.git
 		
