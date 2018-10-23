@@ -62,7 +62,7 @@ function download_kernel_and_tools {
 	#revert any previous changes, so that any patches can be applied flawlessly
 	cd linux
 	git checkout .
-
+	
 	cd ..
 
 	if [ ! -d linux7 ]
@@ -70,8 +70,19 @@ function download_kernel_and_tools {
 		# duplicate the source tree
 		sudo cp -R linux linux7/
 	fi
-
+	
 	cd linux7
+	git checkout .
+	
+	cd ..
+
+	if [ ! -d linux8 ]
+	then
+		# duplicate the source tree
+		sudo cp -R linux linux8/
+	fi
+
+	cd linux8
 	git checkout .
 
 	popd
@@ -103,6 +114,18 @@ function patch_kernel7 {
 	popd
 }
 
+function patch_kernel8 {
+	pushd $PWD
+	cd "$KERNEL_DIR/linux8"
+
+	for f in $KERNEL_PATCHES
+	do
+		echo "Applying patch $f"
+		patch -N -p1 < $f
+	done
+
+	popd
+}
 
 function compile_kernel {	
 	pushd $PWD
@@ -124,6 +147,15 @@ function compile_kernel7 {
 	popd
 }
 
+function compile_kernel8 {	
+	pushd $PWD
+	cd "$KERNEL_DIR/linux8"
+
+	KERNEL=kernel8 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make bcmrpi3_defconfig
+	KERNEL=kernel8 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make -j4
+
+	popd
+}
 
 #args: fat-partition, ext4-partition
 function install_kernel {
@@ -157,6 +189,18 @@ function install_kernel {
 	# mkknlimg no longer needed it seems
 	sudo cp "$1/kernel7.img" "$1/kernel7-backup.img"
 	sudo cp arch/arm/boot/zImage "$1/kernel7.img"
+	sudo cp arch/arm/boot/dts/*.dtb "$1/"
+	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
+	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
+	
+	# Pi3B+
+	cd "$KERNEL_DIR/linux8"
+
+	#install modules 
+	sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$2" modules_install
+	
+	#sudo cp "$1/kernel7.img" "$1/kernel7-backup.img"
+	sudo cp arch/arm/boot/zImage "$1/kernel8.img"
 	sudo cp arch/arm/boot/dts/*.dtb "$1/"
 	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
 	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
@@ -301,8 +345,10 @@ create_git_structure
 download_kernel_and_tools
 patch_kernel
 patch_kernel7
+patch_kernel8
 compile_kernel
 compile_kernel7
+compile_kernel8
 
 #prepare the images
 download_image
