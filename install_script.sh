@@ -17,33 +17,33 @@ sudo apt-get update
 #sudo apt-get -y remove --auto-remove --purge libx11-.*
 
 # Install essentials
-export DEBIAN_FRONTEND=noninteractive
+#export DEBIAN_FRONTEND=noninteractive
 #untill we find a way for noniteractive
-sudo apt-get -y install python-pip
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install python-pip
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install aircrack-ng
-sudo apt-get -y install gnuplot
-sudo apt-get -y install udhcpd
-sudo apt-get -y install socat
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gnuplot
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install udhcpd
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install socat
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install tshark
-sudo apt-get -y install ser2net
-sudo apt-get -y install gstreamer1.0-tools
-sudo apt-get -y install gstreamer1.0-plugins-bad
-sudo apt-get -y install gstreamer1.0-plugins-good
-sudo apt-get -y install libtool
-sudo apt-get -y install autoconf
-sudo apt-get -y install libsdl1.2-dev
-sudo apt-get -y install libboost-all-dev cmake libconfig++-dev libreadline-dev
-sudo apt-get -y install git libpcap-dev wiringpi iw usbmount
-sudo apt-get -y install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
-sudo apt-get -y install python-m2crypto
-sudo apt-get -y install dos2unix
-sudo apt-get -y install hostapd
-sudo apt-get -y install pump
-sudo apt-get -y install libpng12-dev
-sudo apt-get -y install python-future python-attr
-sudo apt-get -y install libfontconfig1-dev 
-sudo apt-get -y install libsdl2-dev
-sudo apt-get -y install libsdl1.2-dev
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ser2net
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gstreamer1.0-tools
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gstreamer1.0-plugins-bad
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gstreamer1.0-plugins-good
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libtool
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install autoconf
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl1.2-dev
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libboost-all-dev cmake libconfig++-dev libreadline-dev
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install git libpcap-dev wiringpi iw usbmount
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libjpeg8-dev indent libfreetype6-dev ttf-dejavu-core
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install python-m2crypto
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install dos2unix
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install hostapd
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install pump
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libpng12-dev
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install python-future python-attr
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libfontconfig1-dev 
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl2-dev
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl1.2-dev
 
 #sudo apt-get -y install tofrodos
 #sudo ln -s /usr/bin/fromdos /usr/bin/dos2unix
