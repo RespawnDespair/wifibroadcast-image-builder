@@ -194,16 +194,16 @@ function install_kernel {
 	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
 	
 	# Pi3B+
-	cd "$KERNEL_DIR/linux8"
+#	cd "$KERNEL_DIR/linux8"
 
 	#install modules 
-	sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$2" modules_install
+#	sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$2" modules_install
 	
 	#sudo cp "$1/kernel7.img" "$1/kernel7-backup.img"
-	sudo cp arch/arm/boot/zImage "$1/kernel8.img"
-	sudo cp arch/arm/boot/dts/*.dtb "$1/"
-	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
-	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
+#	sudo cp arch/arm/boot/zImage "$1/kernel8.img"
+#	sudo cp arch/arm/boot/dts/*.dtb "$1/"
+#	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
+#	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
 
 	popd
 }
@@ -345,10 +345,10 @@ create_git_structure
 download_kernel_and_tools
 patch_kernel
 patch_kernel7
-patch_kernel8
+#patch_kernel8
 compile_kernel
 compile_kernel7
-compile_kernel8
+#compile_kernel8
 
 #prepare the images
 download_image
