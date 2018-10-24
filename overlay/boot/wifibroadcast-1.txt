@@ -81,7 +81,7 @@ TELEMETRY_UPLINK=mavlink
 # Set this to "mavlink" to enable R/C over wifibroadcast using mavlink protocol or "msp" for MSP protocol
 # Set to "sumd" for Graupner SUMD, "ibus" for Flysky IBUS, "srxl" for Multiplex SRXL / XBUS Mode B. Set to "disabled" to disable
 # See joyconfig.txt for other settings, default settings work for Taranis in USB Joystick mode
-RC=disabled
+RC=mavlink
 #
 #
 #
@@ -155,7 +155,7 @@ AIRODUMP_SECONDS=25
 # set this to "Y" to enable Wifi Hotspot. Default SSID is "EZ-Wifibroadcast", password is "wifibroadcast".
 # See apconfig.txt for configuration. This will forward the received video and telemetry streams to a
 # smartphone/tablet or computer connected to the RX Pi via WiFi.
-WIFI_HOTSPOT=N
+WIFI_HOTSPOT=Y
 #
 # Set to "internal" to use the interal Pi3 wifi chip or the MAC address of the USB wifi card you want to use
 WIFI_HOTSPOT_NIC=internal
