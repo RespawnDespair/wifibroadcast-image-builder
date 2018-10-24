@@ -9,10 +9,10 @@
 dd if=/dev/zero of=temp.img bs=1 count=1 seek=2G
 
 # Append to original image
-cat temp.img >> 2018-06-27-raspbian-stretch-lite.img
+cat temp.img >> 2018-10-09-raspbian-stretch-lite.img
 
 # fdisk magic
-fdisk 2018-06-27-raspbian-stretch-lite.img <<EOF
+fdisk 2018-10-09-raspbian-stretch-lite.img <<EOF
 d
 2
 n
