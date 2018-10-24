@@ -137,7 +137,7 @@ function install_kernel {
 	
 	# install kernel and fdt for Pi 1, Pi 0, Pi 0 W, or Compute Module
 	# mkknlimg no longer needed it seems
-	sudo cp "$1/kernel.img" "$1/kernel-backup.img"
+	#sudo cp "$1/kernel.img" "$1/kernel-backup.img"
 	sudo cp arch/arm/boot/zImage "$1/kernel.img"
 	sudo cp arch/arm/boot/dts/*.dtb "$1/"
 	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
@@ -156,7 +156,7 @@ function install_kernel {
 	
 	# install kernel and fdt for Pi 1, Pi 0, Pi 0 W, or Compute Module
 	# mkknlimg no longer needed it seems
-	sudo cp "$1/kernel7.img" "$1/kernel7-backup.img"
+	#sudo cp "$1/kernel7.img" "$1/kernel7-backup.img"
 	sudo cp arch/arm/boot/zImage "$1/kernel7.img"
 	sudo cp arch/arm/boot/dts/*.dtb "$1/"
 	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
