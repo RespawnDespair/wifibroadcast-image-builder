@@ -10,8 +10,9 @@ set -e
 #BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian/images/raspbian-2018-06-29"
 #BASE_IMAGE="2018-06-27-raspbian-stretch"
 
-BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-06-29"
-BASE_IMAGE="2018-06-27-raspbian-stretch-lite"
+# Latest image
+BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-10-11"
+BASE_IMAGE="2018-10-09-raspbian-stretch-lite"
 
 
 DATA_DIR="$PWD/data"
@@ -76,15 +77,6 @@ function download_kernel_and_tools {
 	
 	cd ..
 
-	if [ ! -d linux8 ]
-	then
-		# duplicate the source tree
-		sudo cp -R linux linux8/
-	fi
-
-	cd linux8
-	git checkout .
-
 	popd
 }
 
@@ -114,19 +106,6 @@ function patch_kernel7 {
 	popd
 }
 
-function patch_kernel8 {
-	pushd $PWD
-	cd "$KERNEL_DIR/linux8"
-
-	for f in $KERNEL_PATCHES
-	do
-		echo "Applying patch $f"
-		patch -N -p1 < $f
-	done
-
-	popd
-}
-
 function compile_kernel {	
 	pushd $PWD
 	cd "$KERNEL_DIR/linux"
@@ -143,16 +122,6 @@ function compile_kernel7 {
 
 	KERNEL=kernel7 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make bcm2709_defconfig
 	KERNEL=kernel7 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j4 zImage modules dtbs
-
-	popd
-}
-
-function compile_kernel8 {	
-	pushd $PWD
-	cd "$KERNEL_DIR/linux8"
-
-	KERNEL=kernel8 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make bcmrpi3_defconfig
-	KERNEL=kernel8 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make -j4
 
 	popd
 }
@@ -192,18 +161,6 @@ function install_kernel {
 	sudo cp arch/arm/boot/dts/*.dtb "$1/"
 	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
 	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
-	
-	# Pi3B+
-#	cd "$KERNEL_DIR/linux8"
-
-	#install modules 
-#	sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$2" modules_install
-	
-	#sudo cp "$1/kernel7.img" "$1/kernel7-backup.img"
-#	sudo cp arch/arm/boot/zImage "$1/kernel8.img"
-#	sudo cp arch/arm/boot/dts/*.dtb "$1/"
-#	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$1/overlays/"
-#	sudo cp arch/arm/boot/dts/overlays/README "$1/overlays/"
 
 	popd
 }
@@ -345,10 +302,8 @@ create_git_structure
 download_kernel_and_tools
 patch_kernel
 patch_kernel7
-#patch_kernel8
 compile_kernel
 compile_kernel7
-#compile_kernel8
 
 #prepare the images
 download_image
