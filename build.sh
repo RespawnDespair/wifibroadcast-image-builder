@@ -7,8 +7,8 @@ run_stage(){
 	STAGE_WORK_DIR="${WORK_DIR}/${STAGE}"
 	pushd "${STAGE_DIR}" > /dev/null
 
-    # Create the Work folder
-    mkdir -p "${STAGE_WORK_DIR}"
+	# Create the Work folder
+	mkdir -p "${STAGE_WORK_DIR}"
 
 	# Check wether to skip or not
 	if [ ! -f "${STAGE_DIR}/SKIP" ]; then
@@ -16,7 +16,8 @@ run_stage(){
 	        if [ ! -f "${STAGE_DIR}/SKIP_IMAGE" ]; then
         	    # Copy the image from the previous stage
 	            if [ -f "${PREV_WORK_DIR}/IMAGE.img" ]; then
-		    	    cp "${PREV_WORK_DIR}/IMAGE.img" "${STAGE_WORK_DIR}/IMAGE.img"
+			unmount_image
+			cp "${PREV_WORK_DIR}/IMAGE.img" "${STAGE_WORK_DIR}/IMAGE.img"
 			mount_image
         	    else
                 	log "[ERROR] No image to copy in ${PREV_WORK_DIR}/"

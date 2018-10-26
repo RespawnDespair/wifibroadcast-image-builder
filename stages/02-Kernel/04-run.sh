@@ -1,9 +1,6 @@
 # Do this to the WORK folder of this stage
 pushd ${STAGE_WORK_DIR}
 
-log "Mount the image"
-mount_image
-
 log "Copy the kernel modules"
 pushd linux
 MNT_DIR="${STAGE_WORK_DIR}/mnt"

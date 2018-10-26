@@ -45,8 +45,12 @@ unmount_image(){
 	sync
 	sleep 1
 	
-    MNT_DIR="${STAGE_WORK_DIR}/mnt"
-   	umount -l "$MNT_DIR/boot"
-	umount -l "$MNT_DIR"
+	MNT_DIR="${STAGE_WORK_DIR}/mnt"
+	if mount | grep -q "$MNT_DIR/boot"; then
+		umount -l "$MNT_DIR/boot"
+	fi
+	if mount | grep -q "$MNT_DIR"; then
+		umount -l "$MNT_DIR"
+	fi
 }
 export -f unmount_image
