@@ -16,10 +16,10 @@ run_stage(){
 	        if [ ! -f "${STAGE_DIR}/SKIP_IMAGE" ]; then
         	    # Copy the image from the previous stage
 	            if [ -f "${PREV_WORK_DIR}/IMAGE.img" ]; then
-		    	cp "${PREV_WORK_DIR}/IMAGE.img" "${STAGE_WORK_DIR}/IMAGE.img"
+		    	    cp "${PREV_WORK_DIR}/IMAGE.img" "${STAGE_WORK_DIR}/IMAGE.img"
         	    else
                 	log "[ERROR] No image to copy in ${PREV_WORK_DIR}/"
-		    fi
+		        fi
 	        fi
 
         	# iterate different files

@@ -5,7 +5,7 @@ log "Patch the Kernel"
 pushd linux
 
 for PATCH_FILE in "${STAGE_DIR}/PATCHES/"*; do
-    echo "Applying patch ${PATCH_FILE}"
+    log "Applying patch ${PATCH_FILE}"
     patch -N -p1 < $PATCH_FILE
 done
 
