@@ -33,11 +33,11 @@ run_stage(){
         done
 	fi
 
-    	# SKIP this stage next time
+    # SKIP this stage next time
 	touch "${STAGE_DIR}/SKIP"
 
-    	PREV_STAGE="${STAGE}"
-	PREV_STAGE_DIR="${STAGE_DIR}"
+    PREV_STAGE="${STAGE}"
+    PREV_STAGE_DIR="${STAGE_DIR}"
 
 	popd > /dev/null
 	log "End ${STAGE_DIR}"
