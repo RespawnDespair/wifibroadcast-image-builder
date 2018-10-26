@@ -17,6 +17,7 @@ run_stage(){
         	    # Copy the image from the previous stage
 	            if [ -f "${PREV_WORK_DIR}/IMAGE.img" ]; then
 		    	    cp "${PREV_WORK_DIR}/IMAGE.img" "${STAGE_WORK_DIR}/IMAGE.img"
+			mount_image
         	    else
                 	log "[ERROR] No image to copy in ${PREV_WORK_DIR}/"
 		        fi
@@ -43,6 +44,10 @@ run_stage(){
     	PREV_STAGE="${STAGE}"
     	PREV_STAGE_DIR="${STAGE_DIR}"
 	PREV_WORK_DIR="${WORK_DIR}/${STAGE}"
+
+	if [ ! -f "${STAGE_DIR}/SKIP_IMAGE" ]; then
+		unmount_image
+	fi
 
 	popd > /dev/null
 	log "End ${STAGE_DIR}"
