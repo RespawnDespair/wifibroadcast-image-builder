@@ -1,2 +1,2 @@
-echo "Download image"
+log "Download image"
 

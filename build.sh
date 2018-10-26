@@ -4,40 +4,42 @@
 run_stage(){
 	log "Begin ${STAGE_DIR}"
 	STAGE="$(basename "${STAGE_DIR}")"
+	STAGE_WORK_DIR="${WORK_DIR}/${STAGE}"
 	pushd "${STAGE_DIR}" > /dev/null
 
-    # Check wether to skip or not
+	# Check wether to skip or not
 	if [ ! -f "${STAGE_DIR}/SKIP" ]; then
-        # mount the image for this stage
-        if [ ! -f "${STAGE_DIR}/SKIP_IMAGE" ]; then
-            # Copy the image from the previous stage
-            if [ -f "${PREV_STAGE_DIR}/IMAGE.img" ]; then
-			    cp "${PREV_STAGE_DIR}/IMAGE.img" "${STAGE_DIR}/IMAGE.img"
-            else
-                log "No image to copy in ${PREV_STAGE_DIR}/"
+        	# mount the image for this stage
+	        if [ ! -f "${STAGE_DIR}/SKIP_IMAGE" ]; then
+        	    # Copy the image from the previous stage
+	            if [ -f "${PREV_WORK_DIR}/IMAGE.img" ]; then
+		    	cp "${PREV_WORK_DIR}/IMAGE.img" "${STAGE_WORK_DIR}/IMAGE.img"
+        	    else
+                	log "[ERROR] No image to copy in ${PREV_WORK_DIR}/"
 		    fi
-        fi
+	        fi
 
-        # iterate different files
-        for i in {00..99}; do
-            if [ -x ${i}-run.sh ]; then
-                log "Begin ${STAGE_DIR}/${i}-run.sh"
-                ./${i}-run.sh
-                log "End ${STAGE_DIR}/${i}-run.sh"
-            fi
-            if [ -f ${i}-run-chroot.sh ]; then
-                log "Begin ${STAGE_DIR}/${i}-run-chroot.sh"
-                on_chroot < ${i}-run-chroot.sh
-                log "End ${STAGE_DIR}/${i}-run-chroot.sh"
-            fi
-        done
+        	# iterate different files
+	        for i in {00..99}; do
+        	    if [ -x ${i}-run.sh ]; then
+	                log "Begin ${STAGE_DIR}/${i}-run.sh"
+        	        ./${i}-run.sh
+                	log "End ${STAGE_DIR}/${i}-run.sh"
+	            fi
+        	    if [ -f ${i}-run-chroot.sh ]; then
+                	log "Begin ${STAGE_DIR}/${i}-run-chroot.sh"
+	                on_chroot < ${i}-run-chroot.sh
+	                log "End ${STAGE_DIR}/${i}-run-chroot.sh"
+        	    fi
+	        done
 	fi
 
-    # SKIP this stage next time
+	# SKIP this stage next time
 	touch "${STAGE_DIR}/SKIP"
 
-    PREV_STAGE="${STAGE}"
-    PREV_STAGE_DIR="${STAGE_DIR}"
+    	PREV_STAGE="${STAGE}"
+    	PREV_STAGE_DIR="${STAGE_DIR}"
+	PREV_WORK_DIR="${WORK_DIR}/${STAGE}"
 
 	popd > /dev/null
 	log "End ${STAGE_DIR}"
@@ -77,6 +79,7 @@ export STAGE_DIR
 export STAGE_WORK_DIR
 export PREV_STAGE
 export PREV_STAGE_DIR
+export PREV_WORK_DIR
 export ROOTFS_DIR
 export PREV_ROOTFS_DIR
 export IMG_SUFFIX
@@ -88,8 +91,10 @@ mkdir -p "${WORK_DIR}"
 log "Begin ${BASE_DIR}"
 
 # Iterate trough the steps
-for STAGE_DIR in "${BASE_DIR}/stages"*; do
-	run_stage
+for STAGE_DIR in "${BASE_DIR}/stages/"*; do
+	if [ -d "${STAGE_DIR}" ]; then
+		run_stage
+	fi
 done
 
 log "End ${BASE_DIR}"
