@@ -1,0 +1,4 @@
+log (){
+	date +"[%T] $*" | tee -a "${LOG_FILE}"
+}
+export -f log
