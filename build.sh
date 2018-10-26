@@ -52,10 +52,6 @@ export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}"
 export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
 export LOG_FILE="${WORK_DIR}/build.log"
 
-mkdir -p "${WORK_DIR}"
-log "Begin ${BASE_DIR}"
-
-
 export BASE_DIR
 
 export CLEAN
@@ -73,6 +69,9 @@ export IMG_SUFFIX
 
 # shellcheck source=scripts/common
 source "${SCRIPT_DIR}/common"
+
+mkdir -p "${WORK_DIR}"
+log "Begin ${BASE_DIR}"
 
 # Iterate trough the steps
 for STAGE_DIR in "${BASE_DIR}/stages"*; do
