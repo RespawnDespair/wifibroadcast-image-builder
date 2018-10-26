@@ -54,3 +54,32 @@ unmount_image(){
 	fi
 }
 export -f unmount_image
+
+on_chroot() {
+	MNT_DIR="${STAGE_WORK_DIR}/mnt"
+
+	if ! mount | grep -q "${MNT_DIR}/proc)"; then
+		mount -t proc proc "${MNT_DIR}/proc"
+	fi
+
+	if ! mount | grep -q "${MNT_DIR}/dev)"; then
+		mount --bind /dev "${MNT_DIR}/dev"
+	fi
+	
+	if ! mount | grep -q "${MNT_DIR}/dev/pts)"; then
+		mount --bind /dev/pts "${MNT_DIR}/dev/pts"
+	fi
+
+	if ! mount | grep -q "${MNT_DIR}/sys)"; then
+		mount --bind /sys "${MNT_DIR}/sys"
+	fi
+
+	if ! mount | grep -q "${MNT_DIR}/etc/resolv.conf)"; then
+                mount --bind /etc/resolv.conf "${MNT_DIR}/etc/resolv.conf"
+        fi
+
+	cp "${STAGE_DIR}/$1" "${MNT_DIR}/home/pi/install.sh"
+	sudo chroot --userspec=1000:1000 "$MNT_DIR" /bin/bash "/home/pi/install.sh"
+}
+export -f on_chroot
+
