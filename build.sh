@@ -8,6 +8,16 @@ run_stage(){
 
     # Check wether to skip or not
 	if [ ! -f SKIP ]; then
+        # mount the image for this stage
+        if [ ! -f SKIP_IMAGE ]; then
+            # Copy the image from the previous stage
+            if [ -f "${PREV_STAGE_DIR}/IMAGE.img" ]; then
+			    cp "${PREV_STAGE_DIR}/IMAGE.img" "${STAGE_DIR}/IMAGE.img"
+            else
+                log "No image to copy in ${PREV_STAGE_DIR}/"
+		    fi
+        fi
+
         # iterate different files
         for i in {00..99}; do
             if [ -x ${i}-run.sh ]; then
@@ -25,6 +35,10 @@ run_stage(){
 
     # SKIP this stage next time
     touch ./SKIP
+
+    PREV_STAGE="${STAGE}"
+	PREV_STAGE_DIR="${STAGE_DIR}"
+
 	popd > /dev/null
 	log "End ${STAGE_DIR}"
 }
