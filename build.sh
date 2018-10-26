@@ -7,9 +7,9 @@ run_stage(){
 	pushd "${STAGE_DIR}" > /dev/null
 
     # Check wether to skip or not
-	if [ ! -f SKIP ]; then
+	if [ ! -f "${STAGE_DIR}/SKIP" ]; then
         # mount the image for this stage
-        if [ ! -f SKIP_IMAGE ]; then
+        if [ ! -f "${STAGE_DIR}/SKIP_IMAGE" ]; then
             # Copy the image from the previous stage
             if [ -f "${PREV_STAGE_DIR}/IMAGE.img" ]; then
 			    cp "${PREV_STAGE_DIR}/IMAGE.img" "${STAGE_DIR}/IMAGE.img"
