@@ -7,6 +7,9 @@ run_stage(){
 	STAGE_WORK_DIR="${WORK_DIR}/${STAGE}"
 	pushd "${STAGE_DIR}" > /dev/null
 
+    # Create the Work folder
+    mkdir -p "${STAGE_WORK_DIR}"
+
 	# Check wether to skip or not
 	if [ ! -f "${STAGE_DIR}/SKIP" ]; then
         	# mount the image for this stage
