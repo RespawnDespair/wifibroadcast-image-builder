@@ -1,1 +1,3 @@
 IMG_NAME=EZWFB
+BASE_IMAGE_URL="http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-10-11"
+BASE_IMAGE="2018-10-09-raspbian-stretch-lite"

@@ -72,6 +72,8 @@ export BASE_DIR
 
 export CLEAN
 export IMG_NAME
+export BASE_IMG_URL
+export BASE_IMAGE
 export APT_PROXY
 
 export STAGE
