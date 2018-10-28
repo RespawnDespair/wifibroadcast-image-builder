@@ -1,0 +1,603 @@
+diff --git drivers/net/wireless/ath/ath9k/common-init.c drivers/net/wireless/ath/ath9k/common-init.c
+index 8b4f7fdab..bd46237bf 100644
+--- drivers/net/wireless/ath/ath9k/common-init.c
++++ drivers/net/wireless/ath/ath9k/common-init.c
+@@ -22,14 +22,14 @@
+ 	.band = NL80211_BAND_2GHZ, \
+ 	.center_freq = (_freq), \
+ 	.hw_value = (_idx), \
+-	.max_power = 20, \
++	.max_power = 30, \
+ }
+ 
+ #define CHAN5G(_freq, _idx) { \
+ 	.band = NL80211_BAND_5GHZ, \
+ 	.center_freq = (_freq), \
+ 	.hw_value = (_idx), \
+-	.max_power = 20, \
++	.max_power = 30, \
+ }
+ 
+ /* Some 2 GHz radios are actually tunable on 2312-2732
+@@ -37,6 +37,27 @@
+  * we have calibration data for all cards though to make
+  * this static */
+ static const struct ieee80211_channel ath9k_2ghz_chantable[] = {
++	CHAN2G(2312, 34), /* Channel XX */
++	CHAN2G(2317, 35), /* Channel XX */
++	CHAN2G(2322, 36), /* Channel XX */
++	CHAN2G(2327, 37), /* Channel XX */
++	CHAN2G(2332, 38), /* Channel XX */
++	CHAN2G(2337, 39), /* Channel XX */
++	CHAN2G(2342, 40), /* Channel XX */
++	CHAN2G(2347, 41), /* Channel XX */
++	CHAN2G(2352, 42), /* Channel XX */
++	CHAN2G(2357, 43), /* Channel XX */
++	CHAN2G(2362, 44), /* Channel XX */
++	CHAN2G(2367, 45), /* Channel XX */
++	CHAN2G(2372, 46), /* Channel XX */
++	CHAN2G(2377, 47), /* Channel XX */
++	CHAN2G(2382, 48), /* Channel XX */
++	CHAN2G(2387, 49), /* Channel XX */
++	CHAN2G(2392, 50), /* Channel XX */
++	CHAN2G(2397, 51), /* Channel XX */
++	CHAN2G(2402, 52), /* Channel XX */
++	CHAN2G(2407, 53), /* Channel XX */
++
+ 	CHAN2G(2412, 0), /* Channel 1 */
+ 	CHAN2G(2417, 1), /* Channel 2 */
+ 	CHAN2G(2422, 2), /* Channel 3 */
+@@ -50,7 +71,31 @@ static const struct ieee80211_channel ath9k_2ghz_chantable[] = {
+ 	CHAN2G(2462, 10), /* Channel 11 */
+ 	CHAN2G(2467, 11), /* Channel 12 */
+ 	CHAN2G(2472, 12), /* Channel 13 */
+-	CHAN2G(2484, 13), /* Channel 14 */
++
++	CHAN2G(2477, 13), /* Channel XX */
++	CHAN2G(2478, 14), /* Channel XX */
++	CHAN2G(2482, 15), /* Channel XX */
++
++	CHAN2G(2484, 16), /* Channel 14 */
++
++	CHAN2G(2487, 17), /* Channel XX */
++	CHAN2G(2489, 18), /* Channel XX */
++	CHAN2G(2492, 19), /* Channel XX */
++	CHAN2G(2494, 20), /* Channel XX */
++	CHAN2G(2497, 21), /* Channel XX */
++	CHAN2G(2499, 22), /* Channel XX */
++	CHAN2G(2512, 23), /* Channel XX */
++	CHAN2G(2532, 24), /* Channel XX */
++	CHAN2G(2572, 25), /* Channel XX */
++	CHAN2G(2592, 26), /* Channel XX */
++	CHAN2G(2612, 27), /* Channel XX */
++	CHAN2G(2632, 28), /* Channel XX */
++	CHAN2G(2652, 29), /* Channel XX */
++	CHAN2G(2672, 30), /* Channel XX */
++	CHAN2G(2692, 31), /* Channel XX */
++	CHAN2G(2712, 32), /* Channel XX */
++	CHAN2G(2732, 33), /* Channel XX */
++
+ };
+ 
+ /* Some 5 GHz radios are actually tunable on XXXX-YYYY
+@@ -58,34 +103,39 @@ static const struct ieee80211_channel ath9k_2ghz_chantable[] = {
+  * we have calibration data for all cards though to make
+  * this static */
+ static const struct ieee80211_channel ath9k_5ghz_chantable[] = {
++	CHAN5G(4920, 54), /* Channel XX */
++	CHAN5G(4940, 55), /* Channel XX */
++	CHAN5G(4960, 56), /* Channel XX */
++	CHAN5G(4980, 57), /* Channel XX */
++
+ 	/* _We_ call this UNII 1 */
+-	CHAN5G(5180, 14), /* Channel 36 */
+-	CHAN5G(5200, 15), /* Channel 40 */
+-	CHAN5G(5220, 16), /* Channel 44 */
+-	CHAN5G(5240, 17), /* Channel 48 */
++	CHAN5G(5180, 58), /* Channel 36 */
++	CHAN5G(5200, 59), /* Channel 40 */
++	CHAN5G(5220, 60), /* Channel 44 */
++	CHAN5G(5240, 61), /* Channel 48 */
+ 	/* _We_ call this UNII 2 */
+-	CHAN5G(5260, 18), /* Channel 52 */
+-	CHAN5G(5280, 19), /* Channel 56 */
+-	CHAN5G(5300, 20), /* Channel 60 */
+-	CHAN5G(5320, 21), /* Channel 64 */
++	CHAN5G(5260, 62), /* Channel 52 */
++	CHAN5G(5280, 63), /* Channel 56 */
++	CHAN5G(5300, 64), /* Channel 60 */
++	CHAN5G(5320, 65), /* Channel 64 */
+ 	/* _We_ call this "Middle band" */
+-	CHAN5G(5500, 22), /* Channel 100 */
+-	CHAN5G(5520, 23), /* Channel 104 */
+-	CHAN5G(5540, 24), /* Channel 108 */
+-	CHAN5G(5560, 25), /* Channel 112 */
+-	CHAN5G(5580, 26), /* Channel 116 */
+-	CHAN5G(5600, 27), /* Channel 120 */
+-	CHAN5G(5620, 28), /* Channel 124 */
+-	CHAN5G(5640, 29), /* Channel 128 */
+-	CHAN5G(5660, 30), /* Channel 132 */
+-	CHAN5G(5680, 31), /* Channel 136 */
+-	CHAN5G(5700, 32), /* Channel 140 */
++	CHAN5G(5500, 66), /* Channel 100 */
++	CHAN5G(5520, 67), /* Channel 104 */
++	CHAN5G(5540, 68), /* Channel 108 */
++	CHAN5G(5560, 69), /* Channel 112 */
++	CHAN5G(5580, 70), /* Channel 116 */
++	CHAN5G(5600, 71), /* Channel 120 */
++	CHAN5G(5620, 72), /* Channel 124 */
++	CHAN5G(5640, 73), /* Channel 128 */
++	CHAN5G(5660, 74), /* Channel 132 */
++	CHAN5G(5680, 75), /* Channel 136 */
++	CHAN5G(5700, 76), /* Channel 140 */
+ 	/* _We_ call this UNII 3 */
+-	CHAN5G(5745, 33), /* Channel 149 */
+-	CHAN5G(5765, 34), /* Channel 153 */
+-	CHAN5G(5785, 35), /* Channel 157 */
+-	CHAN5G(5805, 36), /* Channel 161 */
+-	CHAN5G(5825, 37), /* Channel 165 */
++	CHAN5G(5745, 77), /* Channel 149 */
++	CHAN5G(5765, 78), /* Channel 153 */
++	CHAN5G(5785, 79), /* Channel 157 */
++	CHAN5G(5805, 80), /* Channel 161 */
++	CHAN5G(5825, 81), /* Channel 165 */
+ };
+ 
+ /* Atheros hardware rate code addition for short premble */
+diff --git drivers/net/wireless/ath/ath9k/eeprom_4k.c drivers/net/wireless/ath/ath9k/eeprom_4k.c
+index b8c0a0806..4604a193f 100644
+--- drivers/net/wireless/ath/ath9k/eeprom_4k.c
++++ drivers/net/wireless/ath/ath9k/eeprom_4k.c
+@@ -18,6 +18,9 @@
+ #include "hw.h"
+ #include "ar9002_phy.h"
+ 
++extern u8 tx_power_man;
++extern u8 thresh62_man;
++
+ static int ath9k_hw_4k_get_eeprom_ver(struct ath_hw *ah)
+ {
+ 	u16 version = le16_to_cpu(ah->eeprom.map4k.baseEepHeader.version);
+@@ -610,8 +613,12 @@ static void ath9k_hw_4k_set_txpower(struct ath_hw *ah,
+ 	if (test)
+ 	    return;
+ 
+-	for (i = 0; i < Ar5416RateSize; i++)
+-		ratesArray[i] -= AR5416_PWR_TABLE_OFFSET_DB * 2;
++	for (i = 0; i < Ar5416RateSize; i++) {
++//		ratesArray[i] -= AR5416_PWR_TABLE_OFFSET_DB * 2;
++		ratesArray[i] = tx_power_man;
++	}
++
++	printk("ATH: TX Power set: %d\n",tx_power_man);
+ 
+ 	ENABLE_REGWRITE_BUFFER(ah);
+ 
+@@ -982,10 +989,8 @@ static void ath9k_hw_4k_set_board_values(struct ath_hw *ah,
+ 	if (AR_SREV_9271_10(ah))
+ 		REG_RMW_FIELD(ah, AR_PHY_RF_CTL3, AR_PHY_TX_END_TO_A2_RX_ON,
+ 			      pModal->txEndToRxOn);
+-	REG_RMW_FIELD(ah, AR_PHY_CCA, AR9280_PHY_CCA_THRESH62,
+-		      pModal->thresh62);
+-	REG_RMW_FIELD(ah, AR_PHY_EXT_CCA0, AR_PHY_EXT_CCA0_THRESH62,
+-		      pModal->thresh62);
++	REG_RMW_FIELD(ah, AR_PHY_CCA, AR9280_PHY_CCA_THRESH62, thresh62_man);
++	REG_RMW_FIELD(ah, AR_PHY_EXT_CCA0, AR_PHY_EXT_CCA0_THRESH62, thresh62_man);
+ 
+ 	if (ath9k_hw_4k_get_eeprom_rev(ah) >= AR5416_EEP_MINOR_VER_2) {
+ 		REG_RMW_FIELD(ah, AR_PHY_RF_CTL2, AR_PHY_TX_END_DATA_START,
+diff --git drivers/net/wireless/ath/ath9k/eeprom_9287.c drivers/net/wireless/ath/ath9k/eeprom_9287.c
+index 3caa149b1..2b1b75a73 100644
+--- drivers/net/wireless/ath/ath9k/eeprom_9287.c
++++ drivers/net/wireless/ath/ath9k/eeprom_9287.c
+@@ -18,6 +18,8 @@
+ #include "hw.h"
+ #include "ar9002_phy.h"
+ 
++extern u8 tx_power_man;
++
+ #define SIZE_EEPROM_AR9287 (sizeof(struct ar9287_eeprom) / sizeof(u16))
+ 
+ static int ath9k_hw_ar9287_get_eeprom_ver(struct ath_hw *ah)
+@@ -741,8 +743,12 @@ static void ath9k_hw_ar9287_set_txpower(struct ath_hw *ah,
+ 	if (test)
+ 		return;
+ 
+-	for (i = 0; i < Ar5416RateSize; i++)
+-		ratesArray[i] -= AR9287_PWR_TABLE_OFFSET_DB * 2;
++	for (i = 0; i < Ar5416RateSize; i++) {
++//		ratesArray[i] -= AR9287_PWR_TABLE_OFFSET_DB * 2;
++		ratesArray[i] = tx_power_man;
++	}
++
++	printk("ATH: TX Power set: %d\n",tx_power_man);
+ 
+ 	ENABLE_REGWRITE_BUFFER(ah);
+ 
+diff --git drivers/net/wireless/ath/ath9k/hif_usb.h drivers/net/wireless/ath/ath9k/hif_usb.h
+index 7846916aa..5f3d21e3a 100644
+--- drivers/net/wireless/ath/ath9k/hif_usb.h
++++ drivers/net/wireless/ath/ath9k/hif_usb.h
+@@ -61,7 +61,7 @@ extern int htc_use_dev_fw;
+ #define MAX_PKT_NUM_IN_TRANSFER 10
+ 
+ #define MAX_REG_OUT_URB_NUM  1
+-#define MAX_REG_IN_URB_NUM   64
++#define MAX_REG_IN_URB_NUM   8
+ 
+ #define MAX_REG_IN_BUF_SIZE 64
+ 
+diff --git drivers/net/wireless/ath/ath9k/hw.c drivers/net/wireless/ath/ath9k/hw.c
+index 8c5c2dd8f..17c1ef7ad 100644
+--- drivers/net/wireless/ath/ath9k/hw.c
++++ drivers/net/wireless/ath/ath9k/hw.c
+@@ -37,6 +37,40 @@ MODULE_DESCRIPTION("Support for Atheros 802.11n wireless LAN cards.");
+ MODULE_SUPPORTED_DEVICE("Atheros 802.11n WLAN cards");
+ MODULE_LICENSE("Dual BSD/GPL");
+ 
++u8 tx_power_man = 58; //manual power
++u8 cwmin_man = 7;
++u8 cwmax_man = 15;
++u8 aifs_man = 2;
++u8 cck_sifs_man = 10;
++u8 ofdm_sifs_man = 16;
++u8 slottime_man = 9;
++u8 thresh62_man = 28;
++
++module_param_named(txpower,tx_power_man,byte,0444);
++MODULE_PARM_DESC(txpower,"Manual TX power setting, default 58, max 63");
++
++module_param_named(cwmin,cwmin_man,byte,0444);
++MODULE_PARM_DESC(cwmin,"CWMIN setting, 0-255, default 7");
++
++module_param_named(cwmax,cwmax_man,byte,0444);
++MODULE_PARM_DESC(cwmax,"CWMAX setting, 0-255, default 15");
++
++module_param_named(aifs,aifs_man,byte,0444);
++MODULE_PARM_DESC(aifs,"AIFS setting, default 2");
++
++module_param_named(cck_sifs,cck_sifs_man,byte,0444);
++MODULE_PARM_DESC(cck_sifs,"CCK SIFS setting, default 10");
++
++module_param_named(ofdm_sifs,ofdm_sifs_man,byte,0444);
++MODULE_PARM_DESC(ofdm_sifs,"OFDM SIFS setting, default 16");
++
++module_param_named(slottime,slottime_man,byte,0444);
++MODULE_PARM_DESC(slottime,"Slottime setting, default 9");
++
++module_param_named(thresh62,thresh62_man,byte,0444);
++MODULE_PARM_DESC(thresh62,"CCA THRESH62 setting, default 28");
++
++
+ static void ath9k_hw_set_clockrate(struct ath_hw *ah)
+ {
+ 	struct ath_common *common = ath9k_hw_common(ah);
+@@ -1076,7 +1110,8 @@ void ath9k_hw_init_global_settings(struct ath_hw *ah)
+ 	}
+ 
+ 	/* As defined by IEEE 802.11-2007 17.3.8.6 */
+-	slottime += 3 * ah->coverage_class;
++//	slottime += 3 * ah->coverage_class;
++	slottime = slottime_man;
+ 	acktimeout = slottime + sifstime + ack_offset;
+ 	ctstimeout = acktimeout;
+ 
+diff --git drivers/net/wireless/ath/ath9k/hw.h drivers/net/wireless/ath/ath9k/hw.h
+index 4ac70827d..daea83190 100644
+--- drivers/net/wireless/ath/ath9k/hw.h
++++ drivers/net/wireless/ath/ath9k/hw.h
+@@ -73,7 +73,7 @@
+ 
+ #define ATH9K_RSSI_BAD			-128
+ 
+-#define ATH9K_NUM_CHANNELS	38
++#define ATH9K_NUM_CHANNELS	82
+ 
+ /* Register read/write primitives */
+ #define REG_WRITE(_ah, _reg, _val) \
+diff --git drivers/net/wireless/ath/ath9k/mac.c drivers/net/wireless/ath/ath9k/mac.c
+index 77c94f9e7..49db5d9c0 100644
+--- drivers/net/wireless/ath/ath9k/mac.c
++++ drivers/net/wireless/ath/ath9k/mac.c
+@@ -18,6 +18,14 @@
+ #include "hw-ops.h"
+ #include <linux/export.h>
+ 
++extern u8 cwmin_man;
++extern u8 cwmax_man;
++extern u8 aifs_man;
++extern u8 cck_sifs;
++extern u8 ofdm_sifs;
++
++
++
+ static void ath9k_hw_set_txq_interrupts(struct ath_hw *ah,
+ 					struct ath9k_tx_queue_info *qi)
+ {
+@@ -216,7 +224,8 @@ bool ath9k_hw_set_txq_props(struct ath_hw *ah, int q,
+ 	if (qinfo->tqi_aifs != ATH9K_TXQ_USEDEFAULT)
+ 		qi->tqi_aifs = min(qinfo->tqi_aifs, 255U);
+ 	else
+-		qi->tqi_aifs = INIT_AIFS;
++//		qi->tqi_aifs = INIT_AIFS;
++		qi->tqi_aifs = aifs_man;
+ 	if (qinfo->tqi_cwmin != ATH9K_TXQ_USEDEFAULT) {
+ 		cw = min(qinfo->tqi_cwmin, 1024U);
+ 		qi->tqi_cwmin = 1;
+diff --git drivers/net/wireless/ath/regd.c drivers/net/wireless/ath/regd.c
+index e25bfdf78..91c652a6e 100644
+--- drivers/net/wireless/ath/regd.c
++++ drivers/net/wireless/ath/regd.c
+@@ -33,22 +33,16 @@ static int __ath_regd_init(struct ath_regulatory *reg);
+  */
+ 
+ /* Only these channels all allow active scan on all world regulatory domains */
+-#define ATH9K_2GHZ_CH01_11	REG_RULE(2412-10, 2462+10, 40, 0, 20, 0)
++#define ATH9K_2GHZ_CH01_11	REG_RULE(2312-10, 2462+10, 40, 0, 30, 0)
+ 
+ /* We enable active scan on these a case by case basis by regulatory domain */
+-#define ATH9K_2GHZ_CH12_13	REG_RULE(2467-10, 2472+10, 40, 0, 20,\
+-					 NL80211_RRF_NO_IR)
+-#define ATH9K_2GHZ_CH14		REG_RULE(2484-10, 2484+10, 40, 0, 20,\
+-					 NL80211_RRF_NO_IR | \
+-					 NL80211_RRF_NO_OFDM)
++#define ATH9K_2GHZ_CH12_13	REG_RULE(2467-10, 2472+10, 40, 0, 30, 0)
++#define ATH9K_2GHZ_CH14		REG_RULE(2484-10, 2732+10, 40, 0, 30, 0)
+ 
+ /* We allow IBSS on these on a case by case basis by regulatory domain */
+-#define ATH9K_5GHZ_5150_5350	REG_RULE(5150-10, 5350+10, 80, 0, 30,\
+-					 NL80211_RRF_NO_IR)
+-#define ATH9K_5GHZ_5470_5850	REG_RULE(5470-10, 5850+10, 80, 0, 30,\
+-					 NL80211_RRF_NO_IR)
+-#define ATH9K_5GHZ_5725_5850	REG_RULE(5725-10, 5850+10, 80, 0, 30,\
+-					 NL80211_RRF_NO_IR)
++#define ATH9K_5GHZ_5150_5350	REG_RULE(4920-10, 5350+10, 80, 0, 30, 0)
++#define ATH9K_5GHZ_5470_5850	REG_RULE(5470-10, 6100+10, 80, 0, 30, 0)
++#define ATH9K_5GHZ_5725_5850	REG_RULE(5725-10, 6100+10, 80, 0, 30, 0)
+ 
+ #define ATH9K_2GHZ_ALL		ATH9K_2GHZ_CH01_11, \
+ 				ATH9K_2GHZ_CH12_13, \
+@@ -77,9 +71,8 @@ static const struct ieee80211_regdomain ath_world_regdom_63_65 = {
+ 	.n_reg_rules = 4,
+ 	.alpha2 =  "99",
+ 	.reg_rules = {
+-		ATH9K_2GHZ_CH01_11,
+-		ATH9K_2GHZ_CH12_13,
+-		ATH9K_5GHZ_NO_MIDBAND,
++		ATH9K_2GHZ_ALL,
++		ATH9K_5GHZ_ALL,
+ 	}
+ };
+ 
+@@ -88,8 +81,8 @@ static const struct ieee80211_regdomain ath_world_regdom_64 = {
+ 	.n_reg_rules = 3,
+ 	.alpha2 =  "99",
+ 	.reg_rules = {
+-		ATH9K_2GHZ_CH01_11,
+-		ATH9K_5GHZ_NO_MIDBAND,
++		ATH9K_2GHZ_ALL,
++		ATH9K_5GHZ_ALL,
+ 	}
+ };
+ 
+@@ -98,7 +91,7 @@ static const struct ieee80211_regdomain ath_world_regdom_66_69 = {
+ 	.n_reg_rules = 3,
+ 	.alpha2 =  "99",
+ 	.reg_rules = {
+-		ATH9K_2GHZ_CH01_11,
++		ATH9K_2GHZ_ALL,
+ 		ATH9K_5GHZ_ALL,
+ 	}
+ };
+@@ -108,8 +101,7 @@ static const struct ieee80211_regdomain ath_world_regdom_67_68_6A_6C = {
+ 	.n_reg_rules = 4,
+ 	.alpha2 =  "99",
+ 	.reg_rules = {
+-		ATH9K_2GHZ_CH01_11,
+-		ATH9K_2GHZ_CH12_13,
++		ATH9K_2GHZ_ALL,
+ 		ATH9K_5GHZ_ALL,
+ 	}
+ };
+@@ -258,9 +250,10 @@ static bool ath_is_radar_freq(u16 center_freq,
+ 			      struct ath_regulatory *reg)
+ 
+ {
+-	if (reg->country_code == CTRY_INDIA)
+-		return (center_freq >= 5500 && center_freq <= 5700);
+-	return (center_freq >= 5260 && center_freq <= 5700);
++//	if (reg->country_code == CTRY_INDIA)
++//		return (center_freq >= 5500 && center_freq <= 5700);
++//	return (center_freq >= 5260 && center_freq <= 5700);
++	return 0;
+ }
+ 
+ static void ath_force_clear_no_ir_chan(struct wiphy *wiphy,
+diff --git drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcdc.c drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcdc.c
+index 9f2d0b0cf..c1ee6dd08 100644
+--- drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcdc.c
++++ drivers/net/wireless/broadcom/brcm80211/brcmfmac/bcdc.c
+@@ -274,7 +274,8 @@ brcmf_proto_bcdc_hdrpush(struct brcmf_pub *drvr, int ifidx, u8 offset,
+ 	if (pktbuf->ip_summed == CHECKSUM_PARTIAL)
+ 		h->flags |= BCDC_FLAG_SUM_NEEDED;
+ 
+-	h->priority = (pktbuf->priority & BCDC_PRIORITY_MASK);
++//	h->priority = (pktbuf->priority & BCDC_PRIORITY_MASK);
++	h->priority = 0;
+ 	h->flags2 = 0;
+ 	h->data_offset = offset;
+ 	BCDC_SET_IF_IDX(h, ifidx);
+diff --git drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
+index 9763ff4f7..ccfc0feed 100644
+--- drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
++++ drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
+@@ -1003,7 +1003,7 @@ int brcmf_bus_started(struct device *dev)
+ 	brcmf_dbg(TRACE, "\n");
+ 
+ 	/* add primary networking interface */
+-	ifp = brcmf_add_if(drvr, 0, 0, false, "wlan%d", NULL);
++	ifp = brcmf_add_if(drvr, 0, 0, false, "intwifi%d", NULL);
+ 	if (IS_ERR(ifp))
+ 		return PTR_ERR(ifp);
+ 
+diff --git drivers/net/wireless/ralink/rt2x00/rt2800lib.c drivers/net/wireless/ralink/rt2x00/rt2800lib.c
+index d2c289446..048b5860b 100644
+--- drivers/net/wireless/ralink/rt2x00/rt2800lib.c
++++ drivers/net/wireless/ralink/rt2x00/rt2800lib.c
+@@ -4738,6 +4738,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE0);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE0, txpower);
+ 
+ 		/*
+@@ -4749,6 +4750,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE1);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE1, txpower);
+ 
+ 		/*
+@@ -4760,6 +4762,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE2);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE2, txpower);
+ 
+ 		/*
+@@ -4771,6 +4774,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE3);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE3, txpower);
+ 
+ 		/* read the next four txpower values */
+@@ -4788,6 +4792,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE0);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE4, txpower);
+ 
+ 		/*
+@@ -4799,6 +4804,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE1);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE5, txpower);
+ 
+ 		/*
+@@ -4810,6 +4816,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE2);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE6, txpower);
+ 
+ 		/*
+@@ -4821,6 +4828,7 @@ static void rt2800_config_txpower_rt28xx(struct rt2x00_dev *rt2x00dev,
+ 					     EEPROM_TXPOWER_BYRATE_RATE3);
+ 		txpower = rt2800_compensate_txpower(rt2x00dev, is_rate_b, band,
+ 					     power_level, txpower, delta);
++		txpower += rt2800_txpower(rt2x00dev);
+ 		rt2x00_set_field32(&reg, TX_PWR_CFG_RATE7, txpower);
+ 
+ 		rt2800_register_write(rt2x00dev, offset, reg);
+diff --git drivers/net/wireless/ralink/rt2x00/rt2800lib.h drivers/net/wireless/ralink/rt2x00/rt2800lib.h
+index 275e3969a..16518a18e 100644
+--- drivers/net/wireless/ralink/rt2x00/rt2800lib.h
++++ drivers/net/wireless/ralink/rt2x00/rt2800lib.h
+@@ -72,6 +72,8 @@ struct rt2800_ops {
+ 	int (*read_eeprom)(struct rt2x00_dev *rt2x00dev);
+ 	bool (*hwcrypt_disabled)(struct rt2x00_dev *rt2x00dev);
+ 
++	int (*txpower)(struct rt2x00_dev *rt2x00dev);
++
+ 	int (*drv_write_firmware)(struct rt2x00_dev *rt2x00dev,
+ 				  const u8 *data, const size_t len);
+ 	int (*drv_init_registers)(struct rt2x00_dev *rt2x00dev);
+@@ -155,6 +157,13 @@ static inline bool rt2800_hwcrypt_disabled(struct rt2x00_dev *rt2x00dev)
+ 	return rt2800ops->hwcrypt_disabled(rt2x00dev);
+ }
+ 
++static inline int rt2800_txpower(struct rt2x00_dev *rt2x00dev)
++{
++    const struct rt2800_ops *rt2800ops = rt2x00dev->ops->drv;
++
++    return rt2800ops->txpower(rt2x00dev);
++}
++
+ static inline int rt2800_drv_write_firmware(struct rt2x00_dev *rt2x00dev,
+ 					    const u8 *data, const size_t len)
+ {
+diff --git drivers/net/wireless/ralink/rt2x00/rt2800usb.c drivers/net/wireless/ralink/rt2x00/rt2800usb.c
+index 24fc6d204..a4a505ee5 100644
+--- drivers/net/wireless/ralink/rt2x00/rt2800usb.c
++++ drivers/net/wireless/ralink/rt2x00/rt2800usb.c
+@@ -51,6 +51,15 @@ static bool rt2800usb_hwcrypt_disabled(struct rt2x00_dev *rt2x00dev)
+ 	return modparam_nohwcrypt;
+ }
+ 
++static int modparam_txpower;
++module_param_named(txpower, modparam_txpower, int, S_IRUGO);
++MODULE_PARM_DESC(txpower, "TX power. Default 0, min=-5, max=5 (dB)");
++
++static int rt2800usb_txpower(struct rt2x00_dev *rt2x00dev)
++{
++    return modparam_txpower;
++}
++
+ /*
+  * Queue handlers.
+  */
+@@ -820,6 +829,7 @@ static const struct rt2800_ops rt2800usb_rt2800_ops = {
+ 	.regbusy_read		= rt2x00usb_regbusy_read,
+ 	.read_eeprom		= rt2800usb_read_eeprom,
+ 	.hwcrypt_disabled	= rt2800usb_hwcrypt_disabled,
++	.txpower		= rt2800usb_txpower,
+ 	.drv_write_firmware	= rt2800usb_write_firmware,
+ 	.drv_init_registers	= rt2800usb_init_registers,
+ 	.drv_get_txwi		= rt2800usb_get_txwi,
+diff --git drivers/net/wireless/ralink/rt2x00/rt2x00lib.h drivers/net/wireless/ralink/rt2x00/rt2x00lib.h
+index 9ddc1681b..6cffff846 100644
+--- drivers/net/wireless/ralink/rt2x00/rt2x00lib.h
++++ drivers/net/wireless/ralink/rt2x00/rt2x00lib.h
+@@ -29,10 +29,10 @@
+  * Interval defines
+  */
+ #define WATCHDOG_INTERVAL	round_jiffies_relative(HZ)
+-#define LINK_TUNE_SECONDS	1
++#define LINK_TUNE_SECONDS	2
+ #define LINK_TUNE_INTERVAL	round_jiffies_relative(LINK_TUNE_SECONDS * HZ)
+ #define AGC_SECONDS		4
+-#define VCO_SECONDS		10
++#define VCO_SECONDS		180
+ 
+ /*
+  * rt2x00_rate: Per rate device information
+diff --git drivers/net/wireless/realtek/Kconfig drivers/net/wireless/realtek/Kconfig
+index 7df19ad94..dd9dae350 100644
+--- drivers/net/wireless/realtek/Kconfig
++++ drivers/net/wireless/realtek/Kconfig
+@@ -15,5 +15,6 @@ source "drivers/net/wireless/realtek/rtl818x/Kconfig"
+ source "drivers/net/wireless/realtek/rtlwifi/Kconfig"
+ source "drivers/net/wireless/realtek/rtl8192cu/Kconfig"
+ source "drivers/net/wireless/realtek/rtl8xxxu/Kconfig"
++# source "drivers/net/wireless/realtek/rtl8812au/Kconfig"
+ 
+ endif # WLAN_VENDOR_REALTEK
+diff --git drivers/net/wireless/realtek/Makefile drivers/net/wireless/realtek/Makefile
+index e5407ed50..979a7a456 100644
+--- drivers/net/wireless/realtek/Makefile
++++ drivers/net/wireless/realtek/Makefile
+@@ -7,4 +7,5 @@ obj-$(CONFIG_RTL8187)		+= rtl818x/
+ obj-$(CONFIG_RTLWIFI)		+= rtlwifi/
+ obj-$(CONFIG_RTL8192CU)		+= rtl8192cu/
+ obj-$(CONFIG_RTL8XXXU)		+= rtl8xxxu/
++# obj-$(CONFIG_RTL8812AU)		+= rtl8812au/
+ 
