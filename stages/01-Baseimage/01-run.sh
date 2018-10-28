@@ -22,7 +22,7 @@ d
 n
 p
 2
-98304
+${ROOT_OFFSET}
 
 n
 w
