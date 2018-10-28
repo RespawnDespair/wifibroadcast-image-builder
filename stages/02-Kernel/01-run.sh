@@ -6,7 +6,7 @@ pushd linux
 
 for PATCH_FILE in "${STAGE_DIR}/PATCHES/"*; do
     log "Applying patch ${PATCH_FILE}"
-    patch -N -p1 < $PATCH_FILE
+    patch -N -p0 < $PATCH_FILE
 done
 
 log "Copy db.txt"
