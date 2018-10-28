@@ -10,11 +10,11 @@ cat temp.img >> IMAGE.img
 
 log "fdisk magic to enlarge the main partition"
 
-IMG_FILE="${STAGE_WORK_DIR}/IMAGE.img"
-
-PARTED_OUT=$(parted -s "${IMG_FILE}" unit s print)
+PARTED_OUT=$(parted -s IMAGE.img unit s print)
 ROOT_OFFSET=$(echo "$PARTED_OUT" | grep -e '^ 2'| xargs echo -n \
-    | cut -d" " -f 2 | tr -d B)
+    | cut -d" " -f 2 | tr -d s)
+
+echo "ROOT OFFSET: $ROOT_OFFSET"
 
 fdisk IMAGE.img <<EOF
 d
@@ -24,7 +24,6 @@ p
 2
 ${ROOT_OFFSET}
 
-n
 w
 EOF
 
