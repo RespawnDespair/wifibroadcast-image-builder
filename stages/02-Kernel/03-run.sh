@@ -5,7 +5,7 @@ log "Compile kernel For Pi 2, Pi 3, Pi 3+, or Compute Module 3"
 pushd linux
 
 log "Copy Kernel config"
-cp "${STAGE_DIR}/FILES/.config_db_v7_kernel_4_14_66" ./.conf
+cp "${STAGE_DIR}/FILES/.config_db_v7_kernel_4_14_66" ./.config
 
 #KERNEL=kernel7 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make bcm2709_defconfig
 KERNEL=kernel7 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make
