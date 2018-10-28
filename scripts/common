@@ -50,7 +50,7 @@ unmount_image(){
 		umount -l "$MNT_DIR/boot"
 	fi
 	if mount | grep -q "$MNT_DIR"; then
-		umount -l "$MNT_DIR"
+		umount -l "$MNT_DIR/"
 	fi
 }
 export -f unmount_image
@@ -80,6 +80,13 @@ on_chroot() {
 
 	cp "${STAGE_DIR}/$1" "${MNT_DIR}/home/pi/install.sh"
 	sudo chroot --userspec=1000:1000 "$MNT_DIR" /bin/bash "/home/pi/install.sh"
+
+
+	umount -l "${MNT_DIR}/etc/resolv.conf"
+	umount -l "${MNT_DIR}/sys"
+	umount -l "${MNT_DIR}/dev/pts"
+	umount -l "${MNT_DIR}/dev"
+	umount -l "${MNT_DIR}/proc"
 }
 export -f on_chroot
 
