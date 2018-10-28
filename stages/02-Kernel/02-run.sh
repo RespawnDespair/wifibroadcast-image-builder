@@ -5,7 +5,7 @@ log "Compile kernel For Pi 1, Pi Zero, Pi Zero W, or Compute Module"
 pushd linux
 
 log "Copy Kernel config"
-cp "${STAGE_DIR}/FILES/.config_db_v6_kernel_4_14_66" ./.conf
+cp "${STAGE_DIR}/FILES/.config_db_v6_kernel_4_14_66" ./.config
 
 #KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make bcmrpi_defconfig
 KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make 
