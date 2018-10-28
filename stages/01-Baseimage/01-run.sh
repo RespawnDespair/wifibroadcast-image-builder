@@ -24,7 +24,7 @@ p
 2
 $ROOT_OFFSET
 
-y
+n
 w
 EOF
 
