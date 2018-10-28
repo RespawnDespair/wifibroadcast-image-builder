@@ -23,6 +23,8 @@ n
 p
 2
 $ROOT_OFFSET
+
+y
 w
 EOF
 
