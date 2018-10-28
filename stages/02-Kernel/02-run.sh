@@ -4,7 +4,11 @@ pushd ${STAGE_WORK_DIR}
 log "Compile kernel For Pi 1, Pi Zero, Pi Zero W, or Compute Module"
 pushd linux
 
-KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make bcmrpi_defconfig
+log "Copy Kernel config"
+cp "${STAGE_DIR}/FILES/.config_db_v6_kernel_4_14_66" ./.conf
+
+#KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make bcmrpi_defconfig
+KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make 
 KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j4 zImage modules dtbs
 
 log "Saving kernel as ${STAGE_WORK_DIR}/kernel1.img"
