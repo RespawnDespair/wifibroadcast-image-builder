@@ -16,7 +16,7 @@ cp "${STAGE_DIR}/FILES/db.txt" ./drivers/net/wireless
 popd
 
 log "Merge the RTL8812 driver into kernel"
-cp -a rtl8812au/. ../linux/drivers/net/wireless/realtek/rtl8812au/
+cp -a rtl8812au/. linux/drivers/net/wireless/realtek/rtl8812au/
 
 #return 
 popd
