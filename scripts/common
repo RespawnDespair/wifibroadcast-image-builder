@@ -78,9 +78,9 @@ on_chroot() {
                 mount --bind /etc/resolv.conf "${MNT_DIR}/etc/resolv.conf"
         fi
 
-	cp "${STAGE_DIR}/$1" "${MNT_DIR}/home/pi/install.sh"
-	sudo chroot --userspec=1000:1000 "$MNT_DIR" /bin/bash "/home/pi/install.sh"
-
+	#cp "${STAGE_DIR}/$1" "${MNT_DIR}/home/pi/install.sh"
+	#sudo chroot --userspec=1000:1000 "$MNT_DIR" /bin/bash "/home/pi/install.sh"
+	capsh --drop=cap_setfcap "--chroot=${MNT_DIR}/" -- "$@"
 
 	umount -l "${MNT_DIR}/etc/resolv.conf"
 	umount -l "${MNT_DIR}/sys"

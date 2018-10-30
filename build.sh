@@ -33,7 +33,7 @@ run_stage(){
 	            fi
         	    if [ -f ${i}-run-chroot.sh ]; then
                 	log "Begin ${STAGE_DIR}/${i}-run-chroot.sh"
-	                on_chroot ${i}-run-chroot.sh
+	                on_chroot < ${i}-run-chroot.sh
 	                log "End ${STAGE_DIR}/${i}-run-chroot.sh"
         	    fi
 	        done
