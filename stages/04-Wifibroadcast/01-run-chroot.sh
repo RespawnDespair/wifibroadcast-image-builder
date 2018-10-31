@@ -57,6 +57,11 @@ cd wifibroadcast-misc
 sudo chmod +x ftee
 sudo chmod +x raspi2png
 
+#install wifibroadcast-splash
+cd /home/pi
+cd wifibroadcast-splash
+sudo chmod +x compile.sh
+./compile.sh
 
 #patch hello_video
 cd /home/pi
