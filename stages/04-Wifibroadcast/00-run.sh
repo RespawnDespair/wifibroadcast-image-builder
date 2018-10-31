@@ -56,6 +56,9 @@ sudo git clone https://github.com/RespawnDespair/wifibroadcast-misc.git
 log "Download EZWFB - hello_video"
 sudo git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
 
+log "Download EZWFB - Splash"
+sudo git clone https://github.com/RespawnDespair/wifibroadcast-splash.git
+
 #return
 popd
 popd
