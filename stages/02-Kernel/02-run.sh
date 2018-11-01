@@ -13,6 +13,10 @@ KERNEL=kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j4 zImage module
 log "Saving kernel as ${STAGE_WORK_DIR}/kernel1.img"
 mv arch/arm/boot/zImage "${STAGE_WORK_DIR}/kernel1.img"
 
+log "Copy the kernel modules For Pi 1, Pi Zero, Pi Zero W, or Compute Module"
+MNT_DIR="${STAGE_WORK_DIR}/mnt"
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH="$MNT_DIR" modules_install
+
 # out of linux 
 popd
 
