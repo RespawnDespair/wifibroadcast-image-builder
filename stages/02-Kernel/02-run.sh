@@ -20,5 +20,10 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH="$MNT_DIR" mod
 # out of linux 
 popd
 
+log "Copy the DTBs For Pi 1, Pi Zero, Pi Zero W, or Compute Module"
+sudo cp linux/arch/arm/boot/dts/*.dtb "${MNT_DIR}/boot/"
+sudo cp linux/arch/arm/boot/dts/overlays/*.dtb* "${MNT_DIR}/boot/overlays/"
+sudo cp linux/arch/arm/boot/dts/overlays/README "${MNT_DIR}/boot/overlays/"
+
 #return 
 popd
