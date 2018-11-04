@@ -3,4 +3,5 @@ work/
 deploy/
 SKIP
 SKIP_STEP*
+SKIP_CH_STEP*
 buildlog.txt
