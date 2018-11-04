@@ -601,3 +601,14 @@ index e5407ed50..979a7a456 100644
  obj-$(CONFIG_RTL8XXXU)		+= rtl8xxxu/
 + obj-$(CONFIG_RTL8812AU)		+= rtl8812au/
  
+--- drivers/net/wireless/realtek/rtl8812au/Makefile
++++ drivers/net/wireless/realtek/rtl8812au/Makefile
+@@ -173,7 +173,7 @@
+
+ CONFIG_DRVEXT_MODULE = n
+
+-export TopDIR ?= $(shell pwd)
++export TopDIR ?= "$(shell pwd)/drivers/net/wireless/realtek/rtl8812au"
+
+ ########### COMMON  #################################
+ ifeq ($(CONFIG_DISABLE_REGD_C), y)
