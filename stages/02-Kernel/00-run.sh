@@ -18,7 +18,7 @@ popd
 log "Download the rtl8812au drivers"
 rm -r rtl8812au || true
 # Fixed at v5.2.20 as it is deemed more stable for now
-git clone https://github.com/aircrack-ng/rtl8812au.git
+git clone -b v5.2.20 https://github.com/aircrack-ng/rtl8812au.git
 
 #return 
 popd
