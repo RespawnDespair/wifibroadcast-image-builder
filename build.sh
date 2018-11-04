@@ -27,14 +27,23 @@ run_stage(){
         	# iterate different files
 	        for i in {00..99}; do
         	    if [ -x ${i}-run.sh ]; then
-	                log "Begin ${STAGE_DIR}/${i}-run.sh"
-        	        ./${i}-run.sh
-                	log "End ${STAGE_DIR}/${i}-run.sh"
+			SKIP_STEP="${STAGE_DIR}/SKIP_STEP${i}"
+	        	if [ ! -f "${SKIP_STEP}" ]; then
+	                	log "Begin ${STAGE_DIR}/${i}-run.sh"
+        	        	./${i}-run.sh
+                		log "End ${STAGE_DIR}/${i}-run.sh"
+				touch "${SKIP_STEP}"
+				
+			fi
 	            fi
         	    if [ -f ${i}-run-chroot.sh ]; then
-                	log "Begin ${STAGE_DIR}/${i}-run-chroot.sh"
-	                on_chroot < ${i}-run-chroot.sh
-	                log "End ${STAGE_DIR}/${i}-run-chroot.sh"
+			SKIP_CH_STEP="${STAGE_DIR}/SKIP_CH_STEP${i}"
+	        	if [ ! -f "${SKIP_CH_STEP}" ]; then
+                		log "Begin ${STAGE_DIR}/${i}-run-chroot.sh"
+	                	on_chroot < ${i}-run-chroot.sh
+	                	log "End ${STAGE_DIR}/${i}-run-chroot.sh"
+				touch "${SKIP_CH_STEP}"
+			fi
         	    fi
 	        done
 	fi
@@ -107,5 +116,12 @@ for STAGE_DIR in "${BASE_DIR}/stages/"*; do
 		run_stage
 	fi
 done
+
+#  Clean up SKIP_STEP files since we finished the build
+#  and it should be clean for the next run. Maybe make
+#  this an option?
+cd ${BASE_DIR}
+find stages -name "SKIP_STEP*" -exec rm {} \;
+#find stages -name "SKIP*" -exec rm {} \;
 
 log "End ${BASE_DIR}"
