@@ -83,6 +83,8 @@ export CLEAN
 export IMG_NAME
 export BASE_IMAGE_URL
 export BASE_IMAGE
+export J_CORES
+export GIT_KERNEL_SHA1
 export APT_PROXY
 
 export STAGE

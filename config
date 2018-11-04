@@ -11,7 +11,7 @@ BASE_IMAGE="2018-10-09-raspbian-stretch-lite"
 J_CORES=12
 
 # Git SHA-1 hash for specific kernel
-GIT_KERNEL_SHA1="723af8f6d90e65cb10d84279ff4b60fe93cba5d8"
+GIT_KERNEL_SHA1="5b49caa17e91d0e64024380119ad739bb201c674"
 
 
 

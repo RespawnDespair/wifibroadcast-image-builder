@@ -6,6 +6,8 @@ rm -r linux
 
 log "Download the Raspberry Pi Kernel"
 git clone --depth=1 https://github.com/raspberrypi/linux
+# Switch to specific commit
+git checkout $GIT_KERNEL_SHA1
 
 log "Download the rtl8812au drivers"
 # Fixed at v5.2.20 as it is deemed more stable for now
