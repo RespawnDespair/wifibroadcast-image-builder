@@ -1,3 +1,5 @@
+set -e
+
 # Do this to the WORK folder of this stage
 pushd ${STAGE_WORK_DIR}
 
