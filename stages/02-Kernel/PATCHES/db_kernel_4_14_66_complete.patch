@@ -610,6 +610,3 @@ index e5407ed50..979a7a456 100644
 -export TopDIR ?= $(shell pwd)
 +export TopDIR2 ?= $(shell pwd)
 +export TopDIR := $(TopDIR2)/drivers/net/wireless/realtek/rtl8812au
-
- ########### COMMON  #################################
- ifeq ($(CONFIG_DISABLE_REGD_C), y)
