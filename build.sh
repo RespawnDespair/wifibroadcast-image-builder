@@ -119,6 +119,11 @@ for STAGE_DIR in "${BASE_DIR}/stages/"*; do
 	fi
 done
 
+if [ -f "${PREV_WORK_DIR}/IMAGE.img" ]; then
+	mkdir -p "${DEPLOY_DIR}" || true
+	cp "${PREV_WORK_DIR}/IMAGE.img" "${DEPLOY_DIR}/${IMG_NAME}.img"
+fi
+
 #  Clean up SKIP_STEP files since we finished the build
 #  and it should be clean for the next run. Maybe make
 #  this an option?
