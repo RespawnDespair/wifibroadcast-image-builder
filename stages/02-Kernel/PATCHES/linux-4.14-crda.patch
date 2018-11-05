@@ -1,5 +1,5 @@
-﻿--- a/net/wireless/reg.c	2018-07-10 09:54:59.000000000 +0200
-+++ b/net/wireless/reg.c	2018-07-10 11:10:24.000000000 +0200
+﻿--- net/wireless/reg.c
++++ net/wireless/reg.c
 @@ -218,40 +218,29 @@
  /* We keep a static world regulatory domain in case of the absence of CRDA */
  static const struct ieee80211_regdomain world_regdom = {
@@ -78,8 +78,8 @@
  }
  
  bool regulatory_indoor_allowed(void)
---- a/net/wireless/db.txt	2018-07-10 09:54:59.000000000 +0200
-+++ b/net/wireless/db.txt	2018-07-10 11:07:36.000000000 +0200
+--- net/wireless/db.txt
++++ net/wireless/db.txt
 @@ -1,17 +1,43 @@
 -#
 -# This file is a placeholder to prevent accidental build breakage if someone

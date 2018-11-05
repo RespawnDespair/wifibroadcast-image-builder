@@ -1,5 +1,5 @@
-﻿--- a/drivers/net/wireless/ralink/rt2x00/rt2800usb.c	2018-07-10 09:54:39.000000000 +0200
-+++ b/drivers/net/wireless/ralink/rt2x00/rt2800usb.c	2018-07-10 11:28:08.000000000 +0200
+﻿--- drivers/net/wireless/ralink/rt2x00/rt2800usb.c
++++ drivers/net/wireless/ralink/rt2x00/rt2800usb.c
 @@ -48,12 +48,21 @@
  
  static bool rt2800usb_hwcrypt_disabled(struct rt2x00_dev *rt2x00dev)
@@ -36,8 +36,8 @@
  };
  
  static const struct rt2x00lib_ops rt2800usb_rt2x00_ops = {
---- a/drivers/net/wireless/ralink/rt2x00/rt2800lib.h	2018-07-10 09:54:39.000000000 +0200
-+++ b/drivers/net/wireless/ralink/rt2x00/rt2800lib.h	2018-07-10 11:26:54.000000000 +0200
+--- drivers/net/wireless/ralink/rt2x00/rt2800lib.h
++++ drivers/net/wireless/ralink/rt2x00/rt2800lib.h
 @@ -68,12 +68,14 @@
  	int (*regbusy_read)(struct rt2x00_dev *rt2x00dev,
  			    const unsigned int offset,
@@ -73,8 +73,8 @@
  					    const u8 *data, const size_t len)
  {
  	const struct rt2800_ops *rt2800ops = rt2x00dev->ops->drv;
---- a/drivers/net/wireless/ralink/rt2x00/rt2800lib.c	2018-07-10 09:54:39.000000000 +0200
-+++ b/drivers/net/wireless/ralink/rt2x00/rt2800lib.c	2018-07-10 11:25:39.000000000 +0200
+--- drivers/net/wireless/ralink/rt2x00/rt2800lib.c
++++ drivers/net/wireless/ralink/rt2x00/rt2800lib.c
 @@ -4735,45 +4735,49 @@
  		 * TX_PWR_CFG_4: unknown
  		 */

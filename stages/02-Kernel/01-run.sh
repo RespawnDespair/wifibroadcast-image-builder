@@ -12,9 +12,6 @@ for PATCH_FILE in "${STAGE_DIR}/PATCHES/"*; do
     patch -N -p0 < $PATCH_FILE
 done
 
-log "Copy db.txt"
-cp "${STAGE_DIR}/FILES/db.txt" ./drivers/net/wireless
-
 # out of linux 
 popd
 

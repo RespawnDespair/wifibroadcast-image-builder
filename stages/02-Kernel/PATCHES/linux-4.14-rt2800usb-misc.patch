@@ -1,5 +1,5 @@
-﻿--- a/drivers/net/wireless/ralink/rt2x00/rt2x00link.c	2018-07-10 09:54:39.000000000 +0200
-+++ b/drivers/net/wireless/ralink/rt2x00/rt2x00link.c	2018-07-10 11:21:03.000000000 +0200
+﻿--- drivers/net/wireless/ralink/rt2x00/rt2x00link.c
++++ drivers/net/wireless/ralink/rt2x00/rt2x00link.c
 @@ -390,45 +390,28 @@
  					     &link->work, LINK_TUNE_INTERVAL);
  }
@@ -52,8 +52,8 @@
 +	//INIT_DELAYED_WORK(&rt2x00dev->link.watchdog_work, rt2x00link_watchdog);
  	INIT_DELAYED_WORK(&rt2x00dev->link.work, rt2x00link_tuner);
  }
---- a/drivers/net/wireless/ralink/rt2x00/rt2x00lib.h	2018-07-10 09:54:39.000000000 +0200
-+++ b/drivers/net/wireless/ralink/rt2x00/rt2x00lib.h	2018-07-10 11:17:32.000000000 +0200
+--- drivers/net/wireless/ralink/rt2x00/rt2x00lib.h
++++ drivers/net/wireless/ralink/rt2x00/rt2x00lib.h
 @@ -25,17 +25,17 @@
  #ifndef RT2X00LIB_H
  #define RT2X00LIB_H
@@ -75,8 +75,8 @@
   */
  struct rt2x00_rate {
  	unsigned short flags;
---- a/drivers/net/wireless/ralink/rt2x00/rt2x00dev.c	2018-07-10 09:54:39.000000000 +0200
-+++ b/drivers/net/wireless/ralink/rt2x00/rt2x00dev.c	2018-07-10 11:15:48.000000000 +0200
+--- drivers/net/wireless/ralink/rt2x00/rt2x00dev.c
++++ drivers/net/wireless/ralink/rt2x00/rt2x00dev.c
 @@ -88,26 +88,26 @@
  	rt2x00queue_start_queues(rt2x00dev);
  	rt2x00link_start_tuner(rt2x00dev);

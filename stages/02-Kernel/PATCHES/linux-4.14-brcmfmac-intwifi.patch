@@ -1,5 +1,5 @@
-﻿--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c	2018-07-10 10:14:34.000000000 +0200
+﻿--- drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
++++ drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
 @@ -1000,13 +1000,13 @@
  	struct brcmf_if *ifp;
  	struct brcmf_if *p2p_ifp;

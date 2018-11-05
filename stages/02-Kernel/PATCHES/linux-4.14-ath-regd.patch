@@ -1,5 +1,5 @@
-﻿--- a/drivers/net/wireless/ath/regd.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/regd.c	2018-07-10 11:04:41.000000000 +0200
+﻿--- drivers/net/wireless/ath/regd.c
++++ drivers/net/wireless/ath/regd.c
 @@ -30,28 +30,22 @@
   * We have 12 world regulatory domains. To save space we consolidate
   * the regulatory domains in 5 structures by frequency and change
