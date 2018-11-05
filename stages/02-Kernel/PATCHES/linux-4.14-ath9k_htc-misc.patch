@@ -1,5 +1,5 @@
-﻿--- a/drivers/net/wireless/ath/ath9k/mac.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/mac.c	2018-07-10 10:58:58.000000000 +0200
+﻿/drivers/net/wireless/ath/ath9k/mac.c
+/drivers/net/wireless/ath/ath9k/mac.c
 @@ -15,12 +15,18 @@
   */
  
@@ -35,8 +35,8 @@
  		while (qi->tqi_cwmin < cw)
  			qi->tqi_cwmin = (qi->tqi_cwmin << 1) | 1;
  	} else
---- a/drivers/net/wireless/ath/ath9k/hw.h	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/hw.h	2018-07-10 10:57:52.000000000 +0200
+--- drivers/net/wireless/ath/ath9k/hw.h
++++ drivers/net/wireless/ath/ath9k/hw.h
 @@ -70,13 +70,13 @@
  #define ATH_AMPDU_LIMIT_MAX        (64 * 1024 - 1)
  
@@ -52,8 +52,8 @@
  	(_ah)->reg_ops.write((_ah), (_val), (_reg))
  
  #define REG_READ(_ah, _reg) \
---- a/drivers/net/wireless/ath/ath9k/hw.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/hw.c	2018-07-10 10:57:12.000000000 +0200
+--- drivers/net/wireless/ath/ath9k/hw.c
++++ drivers/net/wireless/ath/ath9k/hw.c
 @@ -34,12 +34,45 @@
  
  MODULE_AUTHOR("Atheros Communications");
@@ -116,8 +116,8 @@
  	/*
  	 * Workaround for early ACK timeouts, add an offset to match the
  	 * initval's 64us ack timeout value. Use 48us for the CTS timeout.
---- a/drivers/net/wireless/ath/ath9k/hif_usb.h	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/hif_usb.h	2018-07-10 10:51:39.000000000 +0200
+--- drivers/net/wireless/ath/ath9k/hif_usb.h
++++ drivers/net/wireless/ath/ath9k/hif_usb.h
 @@ -58,13 +58,13 @@
  
  #define MAX_RX_URB_NUM  8
@@ -133,8 +133,8 @@
  /* USB Endpoint definition */
  #define USB_WLAN_TX_PIPE  1
  #define USB_WLAN_RX_PIPE  2
---- a/drivers/net/wireless/ath/ath9k/eeprom_9287.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/eeprom_9287.c	2018-07-10 10:50:13.000000000 +0200
+--- drivers/net/wireless/ath/ath9k/eeprom_9287.c
++++ drivers/net/wireless/ath/ath9k/eeprom_9287.c
 @@ -15,12 +15,14 @@
   */
  
@@ -171,8 +171,8 @@
  	/* OFDM power per rate */
  	REG_WRITE(ah, AR_PHY_POWER_TX_RATE1,
  		  ATH9K_POW_SM(ratesArray[rate18mb], 24)
---- a/drivers/net/wireless/ath/ath9k/eeprom_4k.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/eeprom_4k.c	2018-07-10 10:48:10.000000000 +0200
+--- drivers/net/wireless/ath/ath9k/eeprom_4k.c
++++ drivers/net/wireless/ath/ath9k/eeprom_4k.c
 @@ -15,12 +15,15 @@
   */
  
@@ -230,8 +230,8 @@
  			      pModal->txFrameToDataStart);
  		REG_RMW_FIELD(ah, AR_PHY_RF_CTL2, AR_PHY_TX_END_PA_ON,
  			      pModal->txFrameToPaOn);
---- a/drivers/net/wireless/ath/ath9k/common-init.c	2018-07-10 09:54:38.000000000 +0200
-+++ b/drivers/net/wireless/ath/ath9k/common-init.c	2018-07-10 10:45:04.000000000 +0200
+--- drivers/net/wireless/ath/ath9k/common-init.c
++++ drivers/net/wireless/ath/ath9k/common-init.c
 @@ -19,27 +19,48 @@
  #include "common.h"
  
