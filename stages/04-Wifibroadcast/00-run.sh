@@ -1,6 +1,9 @@
 # Do this to the WORK folder of this stage
 pushd ${STAGE_WORK_DIR}
 
+log "Removing old GIT dir"
+rm -r GIT || true
+
 mkdir -p GIT
 
 pushd GIT
