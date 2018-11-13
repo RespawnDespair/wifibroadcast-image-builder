@@ -40,6 +40,10 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libfontconfig1-dev
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl2-dev
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl1.2-dev
 
+# Remove packages that conflict with the workings of EZ-Wifibroadcast
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge wireless-regdb
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge wpasupplicant
+
 # Python essentials for mavlink router autoconf
 sudo pip install future
 
