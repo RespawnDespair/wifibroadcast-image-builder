@@ -43,6 +43,27 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl1.2-dev
 # Remove packages that conflict with the workings of EZ-Wifibroadcast
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge wireless-regdb
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge wpasupplicant
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge crda
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge cron
+
+#Untested Packages for possible removal
+#DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge dbus
+#DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge dhcpcd5
+#DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge isc-dhcp-client
+#DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge isc-dhcp-common
+
+
+# Remove packages for space savings
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge apt-transport-https
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge aptitude
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge aptitude-common
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge apt-listchanges
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge avahi-daemon
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge bzip2
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge cifs_utils
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge curl
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge iptables
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge triggerhappy
 
 # Python essentials for mavlink router autoconf
 sudo pip install future

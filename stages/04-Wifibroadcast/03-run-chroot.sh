@@ -58,6 +58,18 @@ sudo chmod +x raspi-config
 #disable sync option for usbmount
 sudo sed -i 's/sync,//g' /etc/usbmount/usbmount.conf
 
+#disable unneeded services
+sudo systemctl disable cron.service
+sudo systemctl disable syslog.service
+sudo systemctl disable journald.service
+sudo systemctl disable logind.service
+sudo systemctl disable triggerhappy.service
+sudo systemctl disable avahi-daemon.service
+sudo systemctl disable ser2net.service
+sudo systemctl disable dbus.service
+sudo systemctl disable systemd-timesyncd.service
+sudo systemctl disable hciuart.service
+
 #change hostname
 CURRENT_HOSTNAME=`sudo cat /etc/hostname | sudo tr -d " \t\n\r"`
 NEW_HOSTNAME="wbc"
