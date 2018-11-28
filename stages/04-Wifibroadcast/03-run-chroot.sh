@@ -13,6 +13,27 @@ sudo mkfifo /root/telemetryfifo5
 sudo mkfifo /root/telemetryfifo6
 sudo mkfifo /root/mspfifo
 
+#disable unneeded services
+sudo systemctl disable anacron.service
+sudo systemctl disable syslog.service
+sudo systemctl disable triggerhappy.service
+sudo systemctl disable ser2net.service
+sudo systemctl disable systemd-timesyncd.service
+sudo systemctl disable hciuart.service
+
+#Mask difficult to disable services
+systemctl stop systemd-journald.service
+systemctl disable systemd-journald.service
+systemctl mask systemd-journald.service
+
+systemctl stop systemd-login.service
+systemctl disable systemd-login.service
+systemctl mask systemd-login.service
+
+systemctl stop dbus.service
+systemctl disable dbus.service
+systemctl mask dbus.service
+
 # Copy tty autologin stuff
 cd /etc/systemd/system/getty.target.wants
 sudo cp getty@tty1.service getty@tty2.service
