@@ -9,9 +9,13 @@ sudo systemctl stop dhcpcd.service
 sudo systemctl disable dhcpcd.service
 
 # Latest package source
-sudo rm -rf /var/lib/apt/lists/*
-sudo apt-get clean
-sudo apt-get update
+# sudo rm -rf /var/lib/apt/lists/*
+# sudo apt-get clean
+# sudo apt-get update
+
+# Remove bad and unnecessary symlinks 
+rm /lib/modules/4.14.71*/build
+rm /lib/modules/4.14.71*/source
 
 # Install essentials
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install python-pip
@@ -19,6 +23,7 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install aircrack-ng
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gnuplot
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install udhcpd
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install socat
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install --assume-no wireshark-common
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install tshark
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ser2net
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gstreamer1.0-tools
