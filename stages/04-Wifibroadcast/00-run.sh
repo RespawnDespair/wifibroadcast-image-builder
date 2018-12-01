@@ -62,17 +62,11 @@ sudo git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
 log "Download EZWFB - Splash"
 sudo git clone https://github.com/RespawnDespair/wifibroadcast-splash.git
 
-#return
-popd
-popd
-
-# out
-popd
-
 log "Download the rtl8812au drivers"
 rm -r rtl8812au || true
 # Driver branch is seted up in $RTL8812auBranch in config file
 git clone -b $RTL8812auBranch https://github.com/aircrack-ng/rtl8812au.git
 
-#return 
+#return
+popd
 popd
