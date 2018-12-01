@@ -92,5 +92,6 @@ mv hello_video.bin hello_video.bin.240-befi
 # Install RTL8812au drivers
 cd /home/pi
 cd rtl*
+# in Make file change CONFIG_PLATFORM_I386_PC = y -> n and CONFIG_PLATFORM_ARM_RPI = n -> y
 sudo make
 sudo make install
