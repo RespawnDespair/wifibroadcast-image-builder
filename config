@@ -14,7 +14,7 @@ J_CORES=12
 GIT_KERNEL_SHA1="4f30a5365296658d66ef8a9f878a25d229e2d5fa"
 
 # Branch version for RTL8812au drivers
-$RTL8812auBranch="v5.2.20"
+RTL8812auBranch="v5.2.20"
 
 
 
