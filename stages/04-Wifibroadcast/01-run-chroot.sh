@@ -8,8 +8,8 @@
 cd /home/pi
 cd openvg
 sudo make clean
-sudo make -j $J_CORES library
-sudo make -j $J_CORES install
+sudo make library
+sudo make install
 
 # Gets stuck
 # Install mavlink-router
@@ -18,21 +18,21 @@ cd mavlink-router
 sudo ./autogen.sh && sudo ./configure CFLAGS='-g -O2' \
         --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib64 \
     --prefix=/usr
-sudo make -j $J_CORES 
+sudo make
 
 # Install cmavnode
 cd /home/pi
 cd cmavnode
 sudo mkdir build && cd build
 sudo cmake ..
-sudo make -j $J_CORES 
-sudo make -j $J_CORES install
+sudo make
+sudo make install
 
 # install wifibroadcast base
 cd /home/pi
 cd wifibroadcast-base
 sudo make clean
-sudo make -j $J_CORES 
+sudo make
 
 #install wifibroadcast-rc
 cd /home/pi
@@ -43,7 +43,7 @@ sudo chmod +x build.sh
 cd /home/pi
 cd wifibroadcast-status
 sudo make clean
-sudo make -j $J_CORES 
+sudo make
 
 #install wifibroadcast-scripts
 cd /home/pi
@@ -60,7 +60,7 @@ sudo chmod +x raspi2png
 #install wifibroadcast-splash
 cd /home/pi
 cd wifibroadcast-splash
-sudo make -j $J_CORES 
+sudo make
 
 #patch hello_video
 cd /home/pi
@@ -73,20 +73,24 @@ sudo rm hello_video.bin.240-befi 2> /dev/null || echo > /dev/null
 
 sudo cp video.c.48-mm video.c
 cd ..
-sudo make -j $J_CORES 
+sudo make
 cd /opt/vc/src/hello_pi/hello_video
 mv hello_video.bin hello_video.bin.48-mm
 
 sudo cp video.c.30-mm video.c
 cd ..
-sudo make -j $J_CORES 
+sudo make
 cd /opt/vc/src/hello_pi/hello_video
 mv hello_video.bin hello_video.bin.30-mm
 
 sudo cp video.c.240-befi video.c
 cd ..
-sudo make -j $J_CORES 
+sudo make
 cd /opt/vc/src/hello_pi/hello_video
 mv hello_video.bin hello_video.bin.240-befi
 
-
+# Install RTL8812au drivers
+cd /home/pi
+cd rtl*
+sudo make
+sudo make install
