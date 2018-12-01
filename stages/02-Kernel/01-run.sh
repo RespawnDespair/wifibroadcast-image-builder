@@ -1,9 +1,6 @@
 # Do this to the WORK folder of this stage
 pushd ${STAGE_WORK_DIR}
 
-log "Merge the RTL8812 driver into kernel"
-cp -a rtl8812au/. linux/drivers/net/wireless/realtek/rtl8812au/
-
 log "Patch the Kernel"
 pushd linux
 
