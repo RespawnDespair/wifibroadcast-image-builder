@@ -40,6 +40,13 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libfontconfig1-dev
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl2-dev
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl1.2-dev
 
+# v4l2loopback and flir dependencies NEED TO CHECK IF THEY ARE ALREADY INSTALLED
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install vim
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install fuse
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gstreamer1.0
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install bc
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libusb-1.0-0-dev
+
 # Remove packages that conflict with the workings of EZ-Wifibroadcast
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge wireless-regdb
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge wpasupplicant
@@ -59,11 +66,13 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge aptitude
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge aptitude-common
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge apt-listchanges
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge avahi-daemon
-DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge bzip2
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge cifs_utils
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge curl
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge iptables
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq purge triggerhappy
+
+# Clean Up
+DEBIAN_FRONTEND=noninteractive sudo apt-get -yq autoremove
 
 # Python essentials for mavlink router autoconf
 sudo pip install future
