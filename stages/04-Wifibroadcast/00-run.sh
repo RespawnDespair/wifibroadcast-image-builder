@@ -64,8 +64,9 @@ sudo git clone https://github.com/RespawnDespair/wifibroadcast-splash.git
 
 log "Download the rtl8812au drivers"
 rm -r rtl8812au || true
-# Driver branch is seted up in $RTL8812auBranch in config file
-git clone -b $RTL8812auBranch https://github.com/aircrack-ng/rtl8812au.git
+# Driver branch is seted up in $RTL8812auBranch in config file - doesn't work
+# git clone -b $RTL8812auBranch https://github.com/aircrack-ng/rtl8812au.git
+git clone -b v5.2.20 https://github.com/aircrack-ng/rtl8812au.git
 
 #return
 popd
