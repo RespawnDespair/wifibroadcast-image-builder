@@ -4,12 +4,21 @@
 
 #!/bin/bash
 
-# Install v4l2loopback
+# Install OpenVG and flir stuff
 cd /home/pi
+sudo mkdir /home/pi/flir
+sudo mv v4l2loopback /home/pi/flir
+
+cd flir
 cd v4l2loopback
 sudo make 
 sudo make install
-sudo depmod -a
+sudo depmod -a 
+
+cd /home/pi/flir
+sudo git clone https://github.com/fnoop/flirone-v4l2.git
+cd flirone-v4l2
+sudo make
 
 # Install OpenVG
 cd /home/pi
