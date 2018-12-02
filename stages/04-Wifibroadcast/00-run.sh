@@ -12,6 +12,9 @@ log "Download all WFB Sources"
 
 MNT_DIR="${STAGE_WORK_DIR}/mnt"
 
+log "v4l2loopback"
+sudo git clone https://github.com/umlaeute/v4l2loopback.git
+
 log "Download OpenVG"
 sudo git clone https://github.com/RespawnDespair/openvg-font.git openvg
 
