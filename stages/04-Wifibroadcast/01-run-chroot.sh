@@ -4,6 +4,18 @@
 
 #!/bin/bash
 
+# Install RTL8812au drivers
+cd /home/pi
+cd rtl8812au
+# in Make file change CONFIG_PLATFORM_I386_PC = y -> n and CONFIG_PLATFORM_ARM_RPI = n -> y ; force kernel version
+sudo sed -i 's/CONFIG_PLATFORM_I386_PC = y/CONFIG_PLATFORM_I386_PC = n/' Makefile
+sudo sed -i 's/CONFIG_PLATFORM_ARM_RPI = n/CONFIG_PLATFORM_ARM_RPI = y/' Makefile
+sudo sed -i 's/KVER ?= $(shell uname -r)/KVER ?= 4.14.71-v7+/' Makefile
+sudo make
+sudo make install
+sudo sed -i 's/KVER ?= 4.14.71-v7+/KVER ?= 4.14.71+/' Makefile
+sudo make install
+
 # Install OpenVG
 cd /home/pi
 cd openvg
@@ -88,13 +100,3 @@ cd ..
 sudo make
 cd /opt/vc/src/hello_pi/hello_video
 mv hello_video.bin hello_video.bin.240-befi
-
-# Install RTL8812au drivers
-cd /home/pi
-cd rtl*
-# in Make file change CONFIG_PLATFORM_I386_PC = y -> n and CONFIG_PLATFORM_ARM_RPI = n -> y
-sudo sed -i 's/CONFIG_PLATFORM_I386_PC = y/CONFIG_PLATFORM_I386_PC = n/' Makefile
-sudo sed -i 's/CONFIG_PLATFORM_ARM_RPI = n/CONFIG_PLATFORM_ARM_RPI = y/' Makefile
-
-sudo make
-sudo make install
