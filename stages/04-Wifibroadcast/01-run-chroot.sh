@@ -4,6 +4,13 @@
 
 #!/bin/bash
 
+# Install v4l2loopback
+cd /home/pi
+cd v4l2loopback
+sudo make 
+sudo make install
+sudo depmod -a
+
 # Install OpenVG
 cd /home/pi
 cd openvg
