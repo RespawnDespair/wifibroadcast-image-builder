@@ -52,7 +52,6 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libsdl1.2-dev
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install vim
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install fuse
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install gstreamer1.0
-DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install bc
 DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install libusb-1.0-0-dev
 
 # Remove packages that conflict with the workings of EZ-Wifibroadcast
