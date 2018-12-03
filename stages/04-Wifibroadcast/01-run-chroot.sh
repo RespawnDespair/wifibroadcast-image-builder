@@ -13,7 +13,9 @@ cd flir
 cd v4l2loopback
 sudo make 
 sudo make install
-sudo depmod -a 
+
+# COMMENTED OUT AS IT IS CAUSING FATAL ERROR DUE TO WRONG VERSION (uname issue)
+#sudo depmod -a 
 
 cd /home/pi/flir
 sudo git clone https://github.com/fnoop/flirone-v4l2.git
