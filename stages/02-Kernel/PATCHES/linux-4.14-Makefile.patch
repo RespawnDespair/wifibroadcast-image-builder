@@ -17,7 +17,7 @@ index e5407ed50..979a7a456 100644
  obj-$(CONFIG_RTLWIFI)		+= rtlwifi/
  obj-$(CONFIG_RTL8192CU)		+= rtl8192cu/
  obj-$(CONFIG_RTL8XXXU)		+= rtl8xxxu/
-+ obj-$(CONFIG_RTL8812AU)		+= rtl8812au/
++ obj-$(CONFIG_RTL8821AU)		+= rtl8812au/
  
 --- drivers/net/wireless/realtek/rtl8812au/Makefile
 +++ drivers/net/wireless/realtek/rtl8812au/Makefile
