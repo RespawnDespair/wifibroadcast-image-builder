@@ -104,6 +104,7 @@ export BASE_IMAGE
 export J_CORES
 export GIT_KERNEL_SHA1
 export KERNEL_VERSION
+export KERNEL_VERSION_V7
 export APT_PROXY
 
 export STAGE
