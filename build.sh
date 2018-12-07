@@ -86,6 +86,15 @@ export WORK_DIR="${BASE_DIR}/work"
 export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
 export LOG_FILE="${WORK_DIR}/build.log"
 
+mkdir -p "${WORK_DIR}"
+
+# Get the dynamic information from the image
+curl $BASE_IMAGE_URL/$BASE_IMAGE".info" > $WORK_DIR/infofile
+
+GIT_KERNEL_SHA1=$(cat $WORK_DIR/infofile | grep -Po '\b(Kernel: https:\/\/github\.com\/raspberrypi\/linux\/tree\/\K)+(.*)$')
+KERNEL_VERSION_V7=$(cat $WORK_DIR/infofile | grep -Po '\b(Uname string: Linux version )\K(?<price>[^\ ]+)')
+KERNEL_VERSION=${KERNEL_VERSION_V7%"-v7+"}"+"
+
 export BASE_DIR
 
 export CLEAN
@@ -94,6 +103,7 @@ export BASE_IMAGE_URL
 export BASE_IMAGE
 export J_CORES
 export GIT_KERNEL_SHA1
+export KERNEL_VERSION
 export APT_PROXY
 
 export STAGE
@@ -109,7 +119,10 @@ export IMG_SUFFIX
 # shellcheck source=scripts/common
 source "${SCRIPT_DIR}/common"
 
-mkdir -p "${WORK_DIR}"
+log "IMG ${BASE_IMAGE}"
+log "SHA ${GIT_KERNEL_SHA1}"
+log "V7  ${KERNEL_VERSION_V7}"
+log "VER ${KERNEL_VERSION}"
 log "Begin ${BASE_DIR}"
 
 # Iterate trough the steps
