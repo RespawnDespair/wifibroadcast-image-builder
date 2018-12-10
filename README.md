@@ -6,10 +6,16 @@ For the long version, read on.
 In order to be able to run this you need a Debian or Ubuntu Linux machine with the following packages:
 
 ```
-apt-get install qemu qemu-user-static binfmt-support build-essential gcc-arm*
+apt-get install git qemu qemu-user-static binfmt-support build-essential gcc-arm*
 ```
 
-Then git clone this repository to a suitable folder and run:
+Then git clone this repository to a suitable folder 
+
+```
+git clone https://github.com/RespawnDespair/wifibroadcast-image-builder.git
+```
+
+and run:
 
 ```
 sudo -s
