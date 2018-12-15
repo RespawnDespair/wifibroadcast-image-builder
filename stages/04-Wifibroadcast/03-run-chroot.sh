@@ -48,9 +48,13 @@ sudo cp getty@tty1.service getty@tty10.service
 sudo cp getty@tty1.service getty@tty11.service
 sudo cp getty@tty1.service getty@tty12.service
 
-# raspi-config is not executable after copy
+# Make files executable
 cd /etc/init.d/
 sudo chmod +x raspi-config 
+cd
+cd /root/wifibroadcast_misc/
+sudo chmod +x gpio-config.py
+sudo chmod +x wbcconfig.sh
 
 #enable /dev/video0
 #sudo modprobe bcm2835-v4l2
