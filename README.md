@@ -23,6 +23,10 @@ sudo -s
 ./build.sh
 ```
 
+NOTE : you should answer "No" to the question asked by wireshark installation.
+
+
+
 ## More information (what's going on?)
 The earlier version of this builder did all of the work from a single script, while that is basically fine, there were some issues with the approach taken:
 
