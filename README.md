@@ -3,7 +3,7 @@ Short version: This project takes a Raspbian-lite base image and modifies it int
 For the long version, read on.
 
 ## Using
-In order to be able to run this you need a Debian or Ubuntu Linux machine with the following packages:
+In order to be able to run this you need a Debian or Ubuntu Linux machine with 30 Gb free space on the main partition, and with the following packages:
 
 ```
 sudo apt-get install curl git qemu qemu-user-static binfmt-support build-essential gcc-arm*
