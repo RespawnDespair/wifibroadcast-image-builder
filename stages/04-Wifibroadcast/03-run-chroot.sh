@@ -13,6 +13,10 @@ sudo mkfifo /root/telemetryfifo5
 sudo mkfifo /root/telemetryfifo6
 sudo mkfifo /root/mspfifo
 
+# Enable gpio service
+sudo systemctl enable wbcconfig.service
+sudo systemctl start wbcconfig.service
+
 #disable unneeded services
 sudo systemctl disable anacron.service
 sudo systemctl disable syslog.service
