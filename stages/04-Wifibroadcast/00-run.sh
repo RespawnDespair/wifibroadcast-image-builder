@@ -65,6 +65,9 @@ sudo git clone https://github.com/RespawnDespair/wifibroadcast-hello_video.git
 log "Download EZWFB - Splash"
 sudo git clone https://github.com/RespawnDespair/wifibroadcast-splash.git
 
+log "Download FLIR one"
+sudo git clone https://github.com/fnoop/flirone-v4l2.git
+
 #return
 popd
 popd
